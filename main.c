@@ -4,11 +4,28 @@
 
 
 int main() {
+
     FILE *file;
 
     char cwd[1024];
     char *memoryBuff;
     long file_size;
+    int SizeOfCards =13;
+    //char c = (char) "c";
+    char clubs['C'];
+    char Hearts['H'];
+    char Diamonds['D'];
+    char Spades['S'];
+    int count = 0;
+    char VariableT[2];
+    int DiamondArray = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+
+
+
+    struct CardType {
+    char Variable[2]; //Max 2
+
+    };
 
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -38,12 +55,28 @@ int main() {
         // Read the file into the buffer
         fread(memoryBuff, sizeof(char), file_size, file);
         // Close the file
-        fclose(file);
+    fclose(file);
         // Print the contents of the file
         printf("%s", memoryBuff);
 
         // Free the buffer memory
         free(memoryBuff);
+
+
+
+
+
+            while (fgets(VariableT, sizeof(VariableT), file) != NULL && count < cwd) {
+                sscanf(VariableT, "%d", &cwd[count]);
+                count++;
+            }
+
+//Here it prints the values, but there is something wrong in the while loop or the for loop below.
+    for (int i = 0; i < SizeOfCards; i++) {
+        printf("%d ", cwd[i]);
+        //printf("%d ", gets(VariableT));
+    }
+
 
         return 0;
     }
