@@ -6,7 +6,7 @@
 int main() {
     FILE *file_ptr;
 
-    char cwd[PATH_MAX];
+    char cwd[1024];
     char *memoryBuff;
     long file_size;
 
@@ -19,7 +19,7 @@ int main() {
     }
        // printf("Current working directory: %s\n", cwd);
     char* file_name = "DATA.txt";
-    char file_path[PATH_MAX];
+    char file_path[1024];
     snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
 
     printf("Current working directory: %s\n", cwd);
