@@ -4,45 +4,41 @@
 
 
 int main() {
-    FILE *file_ptr;
+    FILE *file;
 
     char cwd[1024];
     char *memoryBuff;
     long file_size;
 
-
     //char *FileName = "cmake-build-debug/DATA.txt";
-    // Open the file
+    // Open the file, using CWD library to get a user's directory path to make it work.
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
         perror("getcwd() error");
         exit(EXIT_FAILURE);
     }
-       // printf("Current working directory: %s\n", cwd);
     char* file_name = "DATA.txt";
     char file_path[1024];
     snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
 
-    printf("Current working directory: %s\n", cwd);
     printf("File path: %s\n", file_path);
 
-        file_ptr = fopen(file_path, "r");
-        //file_ptr = fopen(FileName, "r");
-        // Get the file size
-        fseek(file_ptr, 0, SEEK_END);
-        file_size = ftell(file_ptr);
-        rewind(file_ptr);
+        file = fopen(file_path, "r");
+
+        fseek(file, 0, SEEK_END);
+        file_size = ftell(file);// Get the file size
+        rewind(file);
 
         // Allocate memory for the file buffer
         memoryBuff = (char *) malloc(file_size * sizeof(char));
         if (!memoryBuff) {
             printf("Error: Could not allocate memory for file buffer\n");
-            fclose(file_ptr);
+            fclose(file);
             return 1;
         }
         // Read the file into the buffer
-        fread(memoryBuff, sizeof(char), file_size, file_ptr);
+        fread(memoryBuff, sizeof(char), file_size, file);
         // Close the file
-        fclose(file_ptr);
+        fclose(file);
         // Print the contents of the file
         printf("%s", memoryBuff);
 
