@@ -4,7 +4,7 @@
 int main() {
     FILE *file_ptr;
 
-    char *buffer;
+    char *memoryBuff;
     long file_size;
     // Open the file
     file_ptr = fopen("C:\\Users\\Mathias\\CLionProjects\\untitled1\\DATA.txt", "r");
@@ -15,24 +15,21 @@ int main() {
     rewind(file_ptr);
 
     // Allocate memory for the file buffer
-    buffer = (char*) malloc(file_size * sizeof(char));
-    if (!buffer) {
+    memoryBuff = (char*) malloc(file_size * sizeof(char));
+    if (!memoryBuff) {
         printf("Error: Could not allocate memory for file buffer\n");
         fclose(file_ptr);
         return 1;
     }
-
     // Read the file into the buffer
-    fread(buffer, sizeof(char), file_size, file_ptr);
-
+    fread(memoryBuff, sizeof(char), file_size, file_ptr);
     // Close the file
     fclose(file_ptr);
-
     // Print the contents of the file
-    printf("%s", buffer);
+    printf("%s", memoryBuff);
 
     // Free the buffer memory
-    free(buffer);
+    free(memoryBuff);
 
     return 0;
 }
