@@ -22,10 +22,17 @@ int main() {
 
 
 
-    struct CardType {
-    char Variable[2]; //Max 2
+   typedef struct CardType {
+     char  name[2];
+  struct CardType * next;
+    //Max 2
 
     };
+
+    struct CardType cards[52];
+
+
+
 
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -57,27 +64,39 @@ int main() {
         // Close the file
     fclose(file);
         // Print the contents of the file
-        printf("%s", memoryBuff);
+        for(int i=0;i<file_size;i++){
+            if(memoryBuff[i]!="\n")
+             //   cards[i]=
+            printf("%c", memoryBuff[i]);
+        }
+
+
+
 
         // Free the buffer memory
         free(memoryBuff);
 
 
 
-
-
-            while (fgets(VariableT, sizeof(VariableT), file) != NULL && count < cwd) {
-                sscanf(VariableT, "%d", &cwd[count]);
-                count++;
-            }
-
-//Here it prints the values, but there is something wrong in the while loop or the for loop below.
-    for (int i = 0; i < SizeOfCards; i++) {
-        printf("%d ", cwd[i]);
-        //printf("%d ", gets(VariableT));
+    /* struct CardType * createCard(char name [2], int pointer) {
+        Cardt *newFlight;
+// allocate a new node
+        newFlight = (Flight*)malloc(sizeof(Flight));
+// initialize node data
+        strcpy(newFlight->ID, ID);
+        newFlight->longitude = longitude;
+        newFlight->latitude = latitude;
+        newFlight->altitude = altitude;
+        newFlight->airSpeed = airSpeed;
+// initialize pointer
+        newFlight->next = NULL;
+        return newFlight;
     }
 
+    */
 
-        return 0;
+
+
+    return 0;
     }
 
