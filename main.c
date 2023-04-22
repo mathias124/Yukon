@@ -5,10 +5,10 @@
 
 int main() {
 
-    FILE *file;
+    FILE file;
 
     char cwd[1024];
-    char *memoryBuff;
+    charmemoryBuff;
     long file_size;
     int SizeOfCards = 13;
     //char c = (char) "c";
@@ -26,20 +26,20 @@ int main() {
 
     typedef struct CardType {
         char name[2];
-        struct CardType *next;
+        struct CardType next;
         //Max 2
 
     };
 
     struct CardType cards[52];
 
-    //char *FileName = "cmake-build-debug/DATA.txt";
+    //charFileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
         perror("getcwd() error");
         exit(EXIT_FAILURE);
     }
-    char *file_name = "DATA.txt";
+    char file_name = "DATA.txt";
     char file_path[1024];
     snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
     printf("File path: %s\n", file_path);
@@ -52,7 +52,7 @@ int main() {
 
 
     // Allocate memory for the file buffer
-    memoryBuff = (char *) malloc(file_size * sizeof(char));
+    memoryBuff = (char) malloc(file_size * sizeof(char));
     if (!memoryBuff) {
         printf("Error: Could not allocate memory for file buffer\n");
         fclose(file);
@@ -63,8 +63,8 @@ int main() {
         int res = fscanf(file, "%c%c", VariableC, VariableT);
         if (res == 2) {
 
-            printf("VariableChar : %c\r\n", *VariableC);
-            printf("VariableT : %c\r\n", *VariableT);
+            printf("VariableChar : %c\r\n", VariableC);
+            printf("VariableT : %c\r\n",VariableT);
         }
     }
 
