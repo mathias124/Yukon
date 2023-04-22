@@ -59,20 +59,14 @@ int main() {
         return 1;
     }
 
-
     while (!feof(file)) {
         int res = fscanf(file, "%c%c", VariableC, VariableT);
         if (res == 2) {
-            for(int i = 0; i<file_size; i++) {
-                if (memoryBuff[i] != "\n"){
 
-                }
-            }
-
-            printf("VariableChar : %s\n",VariableC);
-            printf("VariableT : %s\n",VariableT);
+            printf("VariableChar : %c\r\n", *VariableC);
+            printf("VariableT : %c\r\n", *VariableT);
         }
-}
+    }
 
 
 
@@ -82,43 +76,8 @@ int main() {
     fclose(file);
     // Print the contents of the file
     //for (int i = 0; i < file_size; i += 2) {
-        //if (memoryBuff[i] != "\n" && memoryBuff[i + 1] != "\n") {
-            //Array[count++] = memoryBuff[i];
-            //Array[count++] = memoryBuff[i + 1];
-           // printf("%c",Array[count]);
-
-
-
-
-
-            //printf("%c%c", Array[j], Array[j + 1]);
-
-            //printf("%c", memoryBuff[i]);
-            // Free the buffer memory
-
-
-        free(memoryBuff);
-
-
-        /* struct CardType * createCard(char name [2], int pointer) {
-            Cardt *newFlight;
-    // allocate a new node
-            newFlight = (Flight*)malloc(sizeof(Flight));
-    // initialize node data
-            strcpy(newFlight->ID, ID);
-            newFlight->longitude = longitude;
-            newFlight->latitude = latitude;
-            newFlight->altitude = altitude;
-            newFlight->airSpeed = airSpeed;
-    // initialize pointer
-            newFlight->next = NULL;
-            return newFlight;
-        }
-
-        */
-
-
-
-        return 0;
-    }
-
+    //printf("%c", memoryBuff[i]);
+    // Free the buffer memory
+    free(memoryBuff);
+    return 0;
+}
