@@ -26,8 +26,8 @@ int main() {
 
      struct CardType {
         char name[2];
-        struct CardType *next;
-        //Max 2
+        struct CardType *prev;
+        struct CardType*next;
 
     };
 
@@ -59,11 +59,16 @@ int main() {
         return 1;
     }
 int noCards=0;
+    struct CardType *er = NULL;
     while (!feof(file)) {
         int res = fscanf(file, "%c%c", &VariableC, &VariableT);
         if (res == 2) {
             cards[noCards].name[0]=*VariableC;
+
             cards[noCards].name[1]=*VariableT;
+            cards[noCards].prev=er;
+            er =& cards[noCards];
+
 
 
             printf("VariableChar : %c\r\n", cards[noCards].name[0]);
@@ -71,7 +76,8 @@ int noCards=0;
             noCards++;
         }
     }
-
+    struct CardType mt = *cards[51].prev;
+    printf("Teste : %c\r\n",mt.name[0]);
 
 
     // Read the file into the buffer
