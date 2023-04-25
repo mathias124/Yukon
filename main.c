@@ -10,14 +10,24 @@ int main() {
     char cwd[1024];
     char *memoryBuff;
     long file_size;
-    char VariableT[2];
-    char VariableC[2];
+    int SizeOfCards = 13;
+    //char c = (char) "c";
+    char clubs['C'];
+    char Hearts['H'];
+    char Diamonds['D'];
+    char Spades['S'];
+    int count = 0;
+    char cardColor[2];
+    char cardValue[2];
+    int DiamondArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    char ColorSize[13];
+    char Array[0];
 
 
-     struct CardType {
+    struct CardType {
         char name[2];
-        struct CardType *prev;
-        struct CardType*next;
+        struct CardType *next;
+        //Max 2
 
     };
 
@@ -48,26 +58,35 @@ int main() {
         fclose(file);
         return 1;
     }
-int noCards=0;
-    struct CardType *er = NULL;
+    struct CardType blackCards[26];
+    int noBlackCards = 0;
+    struct CardType redCards[26];
+    int noRedCards = 0;
+
+    int noCards=0;
     while (!feof(file)) {
-        int res = fscanf(file, "%c%c", &VariableC, &VariableT);
+        int res = fscanf(file, "%c%c", &cardValue, &cardColor);
         if (res == 2) {
-            cards[noCards].name[0]=*VariableC;
-
-            cards[noCards].name[1]=*VariableT;
-            cards[noCards].prev=er;
-            er =& cards[noCards];
+            cards[noCards].name[0]=*cardValue;
+            cards[noCards].name[1]=*cardColor;
 
 
-
-            printf("VariableChar : %c\r\n", cards[noCards].name[0]);
-            printf("VariableT : %c\r\n", cards[noCards].name[1]);
+            printf("valueCard : %c\r\n", cards[noCards].name[0]);
+            printf("cardColor : %c\r\n", cards[noCards].name[1]);
+            if(cards[noCards].name[1] == 'S' || cards[noCards].name[1] == 'H'){
+                redCards[noRedCards] = cards[noCards];
+                noRedCards++;
+            }else{
+                blackCards[noBlackCards] = cards[noCards];
+                noBlackCards++;
+            }
+            printf("Number of red cards : %d\r\n", noRedCards);
+            printf("Number of black cards : %d\r\n", noBlackCards);
             noCards++;
         }
     }
-    struct CardType mt = *cards[51].prev;
-    printf("Teste : %c\r\n",mt.name[0]);
+
+
 
 
     // Read the file into the buffer
