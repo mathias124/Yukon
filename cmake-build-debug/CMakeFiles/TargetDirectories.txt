@@ -1,3 +1,0 @@
-C:/Users/Abdis/CLionProjects/Yukon/cmake-build-debug/CMakeFiles/untitled1.dir
-C:/Users/Abdis/CLionProjects/Yukon/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Abdis/CLionProjects/Yukon/cmake-build-debug/CMakeFiles/rebuild_cache.dir
