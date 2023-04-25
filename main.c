@@ -10,18 +10,8 @@ int main() {
     char cwd[1024];
     char *memoryBuff;
     long file_size;
-    int SizeOfCards = 13;
-    //char c = (char) "c";
-    char clubs['C'];
-    char Hearts['H'];
-    char Diamonds['D'];
-    char Spades['S'];
-    int count = 0;
     char VariableT[2];
     char VariableC[2];
-    int DiamondArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-    char ColorSize[13];
-    char Array[0];
 
 
      struct CardType {
