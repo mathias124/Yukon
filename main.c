@@ -71,8 +71,7 @@ int main() {
             cards[noCards].name[1]=*cardColor;
 
 
-            printf("valueCard : %c\r\n", cards[noCards].name[0]);
-            printf("cardColor : %c\r\n", cards[noCards].name[1]);
+            printf("%c%c\r\n", cards[noCards].name[0], cards[noCards].name[1]);
             if(cards[noCards].name[1] == 'S' || cards[noCards].name[1] == 'H'){
                 redCards[noRedCards] = cards[noCards];
                 noRedCards++;
