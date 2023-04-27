@@ -34,7 +34,7 @@ int main() {
         return 1;
     }
     while (!feof(file)) {
-        int res = fscanf(file, "%c%c", &tempCardValue, &tempCardSuit);
+        int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
 
             cards[noCards] = (Card){tempCardSuit, tempCardValue};
