@@ -9,7 +9,6 @@
 
 int main() {
 
-
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
@@ -37,16 +36,15 @@ int main() {
         Card card;
         int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
-            card =  (Card){tempCardSuit, tempCardValue};
+            card = (Card) {tempCardSuit, tempCardValue};
             cards[noCards] = card;
-            printf("specific; %c%c\n",card.cardValue,card.cardSuit);
+            printf("specific; %c%c\n", card.cardValue, card.cardSuit);
             printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
 
-
-            if(cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H'){
+            if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
                 redCards[noRedCards] = cards[noCards];
                 noRedCards++;
-            }else{
+            } else {
                 blackCards[noBlackCards] = cards[noCards];
                 noBlackCards++;
             }
@@ -55,6 +53,21 @@ int main() {
             noCards++;
         }
     }
+    //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
+    shuffleCards(cards, noCards);
+    FILE *save;
+    save = fopen("shuffled_cards.txt", "w");
+    if (save == NULL) {
+        perror("Error could not create savefile");
+        return 1;
+    }
+    for (int i = 0; i < noCards; ++i) {
+        fprintf(save,"%c%c\n",cards[i].cardValue,cards[i].cardSuit);
+    }
+    fclose(save);
+
+
+
 
     // Print the cards in 7 columns
     printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
@@ -93,4 +106,10 @@ void shuffleCards(Card *cards, int noCards){
         cards[i] = cards[j];
         cards[j] = temp;
     }
+}
+
+
+void SaveFile(Card * cards, int noCards) {
+    char val[52];
+
 }
