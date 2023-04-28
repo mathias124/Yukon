@@ -34,10 +34,12 @@ int main() {
         return 1;
     }
     while (!feof(file)) {
+        Card card;
         int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
-
-            cards[noCards] = (Card){tempCardSuit, tempCardValue};
+            card =  (Card){tempCardSuit, tempCardValue};
+            cards[noCards] = card;
+            printf("specific; %c%c\n",card.cardValue,card.cardSuit);
             printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
 
 

@@ -6,6 +6,10 @@ typedef struct Card{
     char cardValue;
 
 }Card;
+
+typedef struct {
+    Card cards[52];
+}Deck;
 // CARD DECK  FOR NOW
 struct Card cards[52];
 struct Card blackCards[26];
@@ -20,6 +24,7 @@ int noCards=0;
 
 void shuffleCards(Card *cards, int noCards);
 
+Deck makeDeck();
 
 
 #endif
