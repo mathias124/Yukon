@@ -6,16 +6,17 @@
 #define UNTITLED1_LINKEDLIST_H
 #include "card.h"
 #include <stdio.h>
+#include <stdbool.h>
 typedef struct Node {
     char name;
-    struct node * next;
-};
+    struct node* next;
+}Node;
 
-void insert(Card *card,struct Node * node);
+void insert(Node** node,int val);
 
 
 
-void remove(Card *card,struct Node * node);
+void remove(Node** node, int val);
 
 
 
