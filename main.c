@@ -1,28 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "card.h"
+#include "readFile.h"
+
+
 
 
 int main() {
 
-    FILE *file;
-
-    char cwd[1024];
-    char *memoryBuff;
-    long file_size;
-
-    char cardColor[2];
-    char cardValue[2];
-
-
-    struct CardType {
-        char name[2];
-        struct CardType *next;
-        //Max 2
-
-    };
-
-    struct CardType cards[52];
 
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -30,16 +16,14 @@ int main() {
         perror("getcwd() error");
         exit(EXIT_FAILURE);
     }
-    char *file_name = "DATA.txt";
-    char file_path[1024];
+
+
     snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
     printf("File path: %s\n", file_path);
     file = fopen(file_path, "r");
     fseek(file, 0, SEEK_END);
     file_size = ftell(file);// Get the file size
     rewind(file);
-
-
 
 
     // Allocate memory for the file buffer
@@ -49,21 +33,17 @@ int main() {
         fclose(file);
         return 1;
     }
-    struct CardType blackCards[26];
-    int noBlackCards = 0;
-    struct CardType redCards[26];
-    int noRedCards = 0;
-
-    int noCards=0;
     while (!feof(file)) {
-        int res = fscanf(file, "%c%c", &cardValue, &cardColor);
+        Card card;
+        int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
-            cards[noCards].name[0]=*cardValue;
-            cards[noCards].name[1]=*cardColor;
+            card =  (Card){tempCardSuit, tempCardValue};
+            cards[noCards] = card;
+            printf("specific; %c%c\n",card.cardValue,card.cardSuit);
+            printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
 
 
-            printf("%c%c\r\n", cards[noCards].name[0], cards[noCards].name[1]);
-            if(cards[noCards].name[1] == 'S' || cards[noCards].name[1] == 'H'){
+            if(cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H'){
                 redCards[noRedCards] = cards[noCards];
                 noRedCards++;
             }else{
@@ -76,7 +56,25 @@ int main() {
         }
     }
 
-
+    // Print the cards in 7 columns
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
+    printf("\n");
+    for (int i = 0; i < noCards; i += 7) {
+        printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
+        if (i + 1 < noCards) printf("%c%c\t", cards[i+1].cardValue, cards[i+1].cardSuit);
+        if (i + 2 < noCards) printf("%c%c\t", cards[i+2].cardValue, cards[i+2].cardSuit);
+        if (i + 3 < noCards) printf("%c%c\t", cards[i+3].cardValue, cards[i+3].cardSuit);
+        if (i + 4 < noCards) printf("%c%c\t", cards[i+4].cardValue, cards[i+4].cardSuit);
+        if (i + 5 < noCards) printf("%c%c\t", cards[i+5].cardValue, cards[i+5].cardSuit);
+        if (i + 6 < noCards) printf("%c%c\n", cards[i+6].cardValue, cards[i+6].cardSuit);
+        else printf("\n");
+    }
+    // INITIAL VIEW
+    printf("%s\n", "LAST Command:");
+    // message
+    printf("%s\n", "MESSAGE: ");
+    // intput
+    printf("%s\n", "INPUT > ");
 
 
     // Read the file into the buffer
@@ -84,5 +82,15 @@ int main() {
     // Close the file
     fclose(file);
     free(memoryBuff);
+
     return 0;
+}
+// placeholder shuffle method
+void shuffleCards(Card *cards, int noCards){
+    for(int  i = noCards -1; i > 0; i--){
+        int j = rand() % (i + 1);
+        Card temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
+    }
 }
