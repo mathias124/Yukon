@@ -11,11 +11,11 @@ typedef struct Node {
     struct node * next;
 };
 
-void insert(Card *card,struct Node * node){
+void insert(Card *card,struct Node * node);
 
 
-}
-void remove(Card *card,struct Node * node)
+
+void remove(Card *card,struct Node * node);
 
 
 
