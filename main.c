@@ -29,7 +29,6 @@ int main() {
     file_size = ftell(file);// Get the file size
     rewind(file);
 
-
     // Allocate memory for the file buffer
     memoryBuff = (char *) malloc(file_size * sizeof(char));
     if (!memoryBuff) {
@@ -100,14 +99,16 @@ int main() {
     //This methods make the game in a while loop and makes the quit command to close game, furthermore commands.
     while (GameOpen) {
         fgets(commandBuff, BUFSIZ, stdin);
-            if (strcmp(commandBuff, "QQ\n") == 0)
+            if (strcmp(commandBuff, "QQ\n") == 0||strcmp(commandBuff, "qq\n") == 0){
                 GameOpen = false;
-        if(strcmp(commandBuff,"SR\n") ==0) {
+            }
+
+        if(strcmp(commandBuff,"SR\n") ==0||strcmp(commandBuff,"sr\n") ==0) {
             ////////// Experimental commands
             shuffleCards(cards, noCards);
         }
         //Undo commando.
-        if(strcmp(commandBuff,"U\n") ==0) {}
+        if(strcmp(commandBuff,"U\n") ==0 || strcmp(commandBuff,"u\n") ==0){}
         Undo = true;
 
     }
