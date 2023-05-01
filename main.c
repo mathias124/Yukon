@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <time.h>
 #include "card.h"
 #include "readFile.h"
 
@@ -73,17 +74,29 @@ int main() {
     fclose(save);
 
     // Print the cards in 7 columns
-    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7");
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
     printf("\n");
-    for (int i = 0; i < noCards; i += 7) {
+    for (int i = 0; i < noCards; i += 9) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
         if (i + 1 < noCards) printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
         if (i + 2 < noCards) printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
         if (i + 3 < noCards) printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
         if (i + 4 < noCards) printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
         if (i + 5 < noCards) printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
-        if (i + 6 < noCards) printf("%c%c\n", cards[i + 6].cardValue, cards[i + 6].cardSuit);
-        else printf("\n");
+        if (i + 6 < noCards) {
+            //Makes a tab after line C7 and using the for loop to count A foundations.
+            if (i / 9 + 1 <= 4) {
+                printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
+                printf("[A%d]\t", i / 9 + 1);
+            } else {
+                printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
+            }
+        } else {
+            printf("[ ]\t[ ]\t");
+        }//This is for line F/9, so it only contains 4 rows.
+        if (i / 9 + 1 <= 4) printf("F%d", i / 9 + 1);
+
+        printf("\n");
     }
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
@@ -105,6 +118,11 @@ int main() {
         if(strcmp(commandBuff,"SR\n") ==0) {
             ////////// Experimental commands
             shuffleCards(cards, noCards);
+            printf("Shuffled Cards:\n");
+            for (int i = 0; i < noCards; i++) {
+                printf("%c\n", cards[i].cardValue);
+            }
+            //GameOpen = false;
         }
         //Undo commando.
         if(strcmp(commandBuff,"U\n") ==0) {}
@@ -121,6 +139,8 @@ int main() {
 }
 // placeholder shuffle method
     void shuffleCards(Card *cards, int noCards) {
+    //Created random seed for cards, so every start is random.
+    srand(time(NULL));
         for (int i = noCards - 1; i > 0; i--) {
             int j = rand() % (i + 1);
             Card temp = cards[i];
