@@ -4,7 +4,9 @@
 typedef struct Card{
     char cardSuit;
     char cardValue;
-    int inList;
+    int trueValue;
+    int column;
+    int Hidden;
     struct Card * next;
     struct Card * prev;
 
