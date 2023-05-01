@@ -5,10 +5,81 @@
 #include "readFile.h"
 
 
+ struct Link{
+    Card Dum;
+    Card Dummy;
+    Card * Head;
+  Card * Tail;
+}
+Link;
 
+typedef struct LinkLLink;
+struct Link c1 = {
+        .Dum = {'x', 0, 0, NULL, NULL},
+        .Dummy = {'y', 0, 0, NULL, NULL},
+        .Head = NULL,
+        .Tail = NULL
+};
+struct c1.Head = &c1.Dum;
+
+// mangler nogen ting.Pototype.
+int remove_last_card(Card **list) {
+    Card *cur = list;
+    Card *prev = NULL;
+
+
+    while (cur != NULL && cur->next != NULL) {
+        prev = cur;
+        cur = cur->next;
+    }
+
+    // If the list is empty or only has Done card, return an error
+    Card *Dum= &Dummy;
+    if (prev == Dum) {
+        return 1;
+    }
+
+    // Remove the last card from the list
+    prev->next = NULL;
+   cur->next=NULL;
+
+
+    return 0;}
+
+int insert(Card *card, Card **list) {
+    Card *cur = list;
+    Card *prev = *list;
+
+    // Check if the card is already in the list
+    if (card->inList) {
+        return 1;
+    }
+
+    // Traverse the list to find the last card
+    while (cur != NULL) {
+        prev = cur;
+        cur = cur->next;
+    }
+
+    // Add the card to the end of the list
+    card->prev = prev;
+    card->next = NULL;
+    card->inList = 1;
+    prev->next = card;
+
+    return 0;
+}
+Card  LAstCard(Card **list) {
+    Card* cur = list;
+
+    while (cur->next != NULL) {
+        cur = cur->next;
+    }
+Card s=*cur;
+    return s;
+}
 
 int main() {
-
 
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -16,6 +87,7 @@ int main() {
         perror("getcwd() error");
         exit(EXIT_FAILURE);
     }
+
 
 
     snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
@@ -41,6 +113,9 @@ int main() {
             cards[noCards] = card;
             printf("specific; %c%c\n",card.cardValue,card.cardSuit);
             printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
+            cards[noCards].next=NULL;
+            cards[noCards].prev=NULL;
+            cards[noCards].inList=0;
 
 
             if(cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H'){
@@ -55,6 +130,12 @@ int main() {
             noCards++;
         }
     }
+
+
+
+
+
+
 
     // Print the cards in 7 columns
     printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
@@ -77,15 +158,44 @@ int main() {
     printf("%s\n", "INPUT > ");
 
 
+
+
+
+    insert(&cards[2], c1);
+    insert(&cards[2], c1);
+
+    //remove_last_card(c1);
+    //remove_last_card(c1);
+
+    Card found=LAstCard(c1);
+
+
+        printf("Next card after dummy: %c%c\n", found.cardValue, found.cardSuit);
+
+
+  //  Card  th = *list->next;
+
+
+
+
+
+
+
     // Read the file into the buffer
     fread(memoryBuff, sizeof(char), file_size, file);
     // Close the file
     fclose(file);
     free(memoryBuff);
 
+
+
+
+
+
+
     return 0;
 }
-// placeholder shuffle method
+/*// placeholder shuffle method
 void shuffleCards(Card *cards, int noCards){
     for(int  i = noCards -1; i > 0; i--){
         int j = rand() % (i + 1);
@@ -93,4 +203,5 @@ void shuffleCards(Card *cards, int noCards){
         cards[i] = cards[j];
         cards[j] = temp;
     }
-}
+
+}*/

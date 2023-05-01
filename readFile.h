@@ -14,7 +14,7 @@ char *file_name = "DATA.txt";
 char file_path[1024];
 
 typedef struct ReadFile{
-    Card card;
+
 }ReadFile;
 
 ReadFile readFromFile(char *file);
