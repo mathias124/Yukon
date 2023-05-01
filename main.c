@@ -11,6 +11,7 @@
 int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
     bool GameOpen = true;
+    bool Undo = false;
     char commandBuff[BUFSIZ];
 
     //char *FileName = "cmake-build-debug/DATA.txt";
@@ -58,6 +59,7 @@ int main() {
         }
     }
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
+    //The next 40 lines are for creating and shuffeling cards and saving it.
     shuffleCards(cards, noCards);
     FILE *save;
     save = fopen("shuffled_cards.txt", "w");
@@ -76,12 +78,12 @@ int main() {
     for (int i = 0; i < noCards; i += 7) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
         if (i + 1 < noCards) printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
-        if (i + 2< noCards) printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
+        if (i + 2 < noCards) printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
         if (i + 3 < noCards) printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
         if (i + 4 < noCards) printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
         if (i + 5 < noCards) printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
         if (i + 6 < noCards) printf("%c%c\n", cards[i + 6].cardValue, cards[i + 6].cardSuit);
-        else printf("");
+        else printf("\n");
     }
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
@@ -95,13 +97,26 @@ int main() {
     // Close the file
     fclose(file);
     free(memoryBuff);
-
-    //QQ OpgaveKriterie
+    //This methods make the game in a while loop and makes the quit command to close game, furthermore commands.
     while (GameOpen) {
         fgets(commandBuff, BUFSIZ, stdin);
             if (strcmp(commandBuff, "QQ\n") == 0)
                 GameOpen = false;
+        if(strcmp(commandBuff,"SR\n") ==0) {
+            ////////// Experimental commands
+            shuffleCards(cards, noCards);
         }
+        //Undo commando.
+        if(strcmp(commandBuff,"U\n") ==0) {}
+        Undo = true;
+
+    }
+    ///Redo Command
+    if(strcmp(commandBuff,"R\n") ==0) {
+        if (Undo == true) {
+            //Needs to be undone, before redo is available.
+        }
+    }
         return 0;
 }
 // placeholder shuffle method
