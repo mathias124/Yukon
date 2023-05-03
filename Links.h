@@ -26,6 +26,7 @@ int charConverter(char c);
 int insert(Card *card, Link *link);
 int RemoveLastCard(Link * link);
 Card getCard(char suit, char value, LinkedLists* lists);
+Card getLastCard(Link link1);
 
 
 
@@ -43,10 +44,7 @@ Card getCard(char suit, char value, LinkedLists* lists);
 // mangler nogen ting.Pototype.
 
 int insert(Card *card, Link *link) {
-    // Check if the card is already in the list
-    if (card->column>0) {
-        return 1;
-    }
+
 
     // Add the card to the end of the list
     if (link->start.next == &(link->end)) { // List is empty
@@ -124,9 +122,7 @@ int remove_last_card( Link *link) {
 }
 int SuperInsert(Card* card1, Card* card2, LinkedLists* lists) {
     Card end = lists->list[card1->column]->end;
-    if (InsertAllowd(card1, card2)) {
-        return 0;
-    }
+
 
     // remove cards from the old list
 
@@ -138,13 +134,7 @@ int SuperInsert(Card* card1, Card* card2, LinkedLists* lists) {
 
 
     // insert cards into the new list
-    Card next= *card2->next;
-    Card cardOne=*card1;
-    Card cardtwo=*card2;
-    card2->next = &cardOne;
-    card1->prev= &cardtwo;
-    card1->next = &next;
-    next.prev = &cardOne;
+    insert(card1,lists->list[card2->column]);
 
 
     // update the column of the moved cards
