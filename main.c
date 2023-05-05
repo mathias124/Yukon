@@ -11,7 +11,7 @@
 
 
 
-
+void getLastCardInDeck(Card *pCard, int cards);
 
 int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
@@ -116,19 +116,21 @@ int main() {
         if (i + 6 < noCards) {
             //Makes a tab after line C7 and using the for loop to count A foundations.
             insert(&cards[i],&c7);
-            if (i / 9 + 1 <= 4) {
+            if (i / 7 + 1 <= 4) {
                 printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
-                printf("[A%d]\t", i / 9 + 1);
+                printf("[A%d]\t", i / 7 + 1);
             } else {
                 printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
             }
         } else {
            // printf("[ ]\t[ ]\t");
         }//This is for line F/9, so it only contains 4 rows.
-        if (i / 9 + 1 <= 4) printf("F%d", i / 9 + 1);
+        if (i / 7 + 1 <= 4) printf("F%d", i / 7 + 1);
+
 
         printf("\n");
     }
+    printf("\n");
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
     // message
@@ -210,22 +212,12 @@ int main() {
     void shuffleCards(Card *cards, int noCards) {
     //Created random seed for cards, so every start is random.
     srand(time(NULL));
-        for (int i = noCards - 1; i > 0; i--) {
-            int j = rand() % (i + 1);
-            Card temp = cards[i];
-            cards[i] = cards[j];
-            cards[j] = temp;
-        }
-    }
-
-
-/*// placeholder shuffle method
-void shuffleCards(Card *cards, int noCards){
-    for(int  i = noCards -1; i > 0; i--){
+    for (int i = noCards - 1; i > 0; i--) {
         int j = rand() % (i + 1);
         Card temp = cards[i];
         cards[i] = cards[j];
         cards[j] = temp;
+
     }
 
-}*/
+}
