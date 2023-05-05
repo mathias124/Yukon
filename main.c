@@ -102,13 +102,20 @@ int main() {
     printf("\n");
     for (int i = 0; i < noCards; i += 9) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
-        if (i + 1 < noCards) printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
-        if (i + 2 < noCards) printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
-        if (i + 3 < noCards) printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
-        if (i + 4 < noCards) printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
-        if (i + 5 < noCards) printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
+        insert(&cards[i],&c1);
+        if (i + 1 < noCards) {printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
+            insert(&cards[i],&c2);}
+        if (i + 2 < noCards) { printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
+            insert(&cards[i],&c3);}
+        if (i + 3 < noCards){ printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
+            insert(&cards[i],&c4);}
+        if (i + 4 < noCards) { printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
+            insert(&cards[i],&c5);}
+        if (i + 5 < noCards){ printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
+            insert(&cards[i],&c6);}
         if (i + 6 < noCards) {
             //Makes a tab after line C7 and using the for loop to count A foundations.
+            insert(&cards[i],&c7);
             if (i / 9 + 1 <= 4) {
                 printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
                 printf("[A%d]\t", i / 9 + 1);
@@ -133,10 +140,10 @@ int main() {
 
 
 
-    insert(&cards[2], &c1);
-    cards[1].prev=&c1.start;
-    cards[1].next=&c1.end;
-    SuperInsert(&cards[1],&cards[2],&AllList);
+   // insert(&cards[2], &c1);
+    //cards[1].prev=&c1.start;
+    //cards[1].next=&c1.end;
+    //SuperInsert(&cards[1],&cards[2],&AllList);
 
 
 
@@ -147,7 +154,6 @@ int main() {
   //  Card found=LAstCard(c1);
 
 
-        printf("Next card after dummy: %c%c\n", c1.start.next->next->next->cardSuit, c1.start.next->next->next->cardValue);
 
 
   //  Card  th = *list->next;
@@ -165,6 +171,7 @@ int main() {
     free(memoryBuff);
     //This methods make the game in a while loop and makes the quit command to close game, furthermore commands.
     while (GameOpen) {
+
         fgets(commandBuff, BUFSIZ, stdin);
             if (strcmp(commandBuff, "QQ\n") == 0||strcmp(commandBuff, "qq\n") == 0){
                 GameOpen = false;
