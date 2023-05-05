@@ -5,6 +5,10 @@
 #include <time.h>
 #include "card.h"
 #include "readFile.h"
+#include "Links.h"
+
+
+
 
 
 
@@ -14,6 +18,22 @@ int main() {
     bool GameOpen = true;
     bool Undo = false;
     char commandBuff[BUFSIZ];
+    LinkedLists AllList;
+    AllList.list[0]=&c1;
+    AllList.list[1]=&c2;
+    AllList.list[2]=&c3;
+    AllList.list[3]=&c4;
+    AllList.list[4]=&c5;
+    AllList.list[5]=&c6;
+    AllList.list[6]=&c7;
+    AllList.list[7]=&a1;
+    AllList.list[8]=&a2;
+    AllList.list[9]=&a3;
+    AllList.list[10]=&a4;
+
+
+
+
 
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -45,6 +65,11 @@ int main() {
             cards[noCards] = card;
             printf("specific; %c%c\n", card.cardValue, card.cardSuit);
             printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
+            cards[noCards].next=NULL;
+            cards[noCards].prev=NULL;
+            cards[noCards].trueValue= charConverter(cards[noCards].cardValue);
+
+
 
             if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
                 redCards[noRedCards] = cards[noCards];
@@ -104,6 +129,35 @@ int main() {
     // intput
     printf("%s\n", "INPUT > ");
 
+
+
+
+
+    insert(&cards[2], &c1);
+    cards[1].prev=&c1.start;
+    cards[1].next=&c1.end;
+    SuperInsert(&cards[1],&cards[2],&AllList);
+
+
+
+
+    //remove_last_card(c1);
+    //remove_last_card(c1);
+
+  //  Card found=LAstCard(c1);
+
+
+        printf("Next card after dummy: %c%c\n", c1.start.next->next->next->cardSuit, c1.start.next->next->next->cardValue);
+
+
+  //  Card  th = *list->next;
+
+
+
+
+
+
+
     // Read the file into the buffer
     fread(memoryBuff, sizeof(char), file_size, file);
     // Close the file
@@ -137,6 +191,13 @@ int main() {
         }
     }
         return 0;
+
+
+
+
+
+
+    return 0;
 }
 // placeholder shuffle method
     void shuffleCards(Card *cards, int noCards) {
@@ -150,3 +211,14 @@ int main() {
         }
     }
 
+
+/*// placeholder shuffle method
+void shuffleCards(Card *cards, int noCards){
+    for(int  i = noCards -1; i > 0; i--){
+        int j = rand() % (i + 1);
+        Card temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
+    }
+
+}*/

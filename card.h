@@ -4,8 +4,11 @@
 typedef struct Card{
     char cardSuit;
     char cardValue;
-    char cardLocation;
-    char cardColumn;
+    int trueValue;
+    int column;
+    int Hidden;
+    struct Card * next;
+    struct Card * prev;
 
 }Card;
 
@@ -14,7 +17,6 @@ typedef struct {
 }Deck;
 // CARD DECK  FOR NOW
 struct Card cards[52];
-struct Card foundation [3];
 struct Card blackCards[26];
 struct Card redCards[26];
 // CARD TYPES
