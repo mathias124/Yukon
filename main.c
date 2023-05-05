@@ -85,7 +85,7 @@ int main() {
     }
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
-    shuffleCards(cards, noCards);
+    //shuffleCards(cards, noCards);
     FILE *save;
     save = fopen("shuffled_cards.txt", "w");
     if (save == NULL) {
@@ -100,7 +100,7 @@ int main() {
     // Print the cards in 7 columns
     printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
     printf("\n");
-    for (int i = 0; i < noCards; i += 9) {
+    for (int i = 0; i < noCards; i += 7) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
         insert(&cards[i],&c1);
         if (i + 1 < noCards) {printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
@@ -123,7 +123,7 @@ int main() {
                 printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
             }
         } else {
-            printf("[ ]\t[ ]\t");
+           // printf("[ ]\t[ ]\t");
         }//This is for line F/9, so it only contains 4 rows.
         if (i / 9 + 1 <= 4) printf("F%d", i / 9 + 1);
 
