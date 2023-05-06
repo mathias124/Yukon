@@ -88,6 +88,19 @@ int main() {
     for (int i = 0; i < 52; i++) {
         insert_card(&deck, cards[i].cardSuit, cards[i].cardValue);
     }
+    Card* tableau[7] = {NULL};
+    Card* foundation[4] = {NULL};
+    for (int i = 0; i < 7; i++) {
+        for (int j = i; j < 7; j++) {
+            insert_card(&tableau[j], deck->cardSuit, deck->cardValue);
+            deck = deck->next;
+        }
+    }
+    for (int i = 0; i < 7; i++) {
+            print_cards(tableau[i]);
+            printf("\t");
+            printf("\n");
+        }
 
 
     // Print the cards in 7 columns
@@ -104,6 +117,7 @@ int main() {
         else printf("\n");
     }*/
     for (int i = 0; i < noCards; i += 7) {
+
         for (int j = 0; j < 7 && i+j < noCards; j++) {
             printf("%c%c\t", cards[i+j].cardValue, cards[i+j].cardSuit);
         }
