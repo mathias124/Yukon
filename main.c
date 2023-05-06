@@ -59,8 +59,8 @@ int main() {
         if (res == 2) {
             card =  (Card){tempCardSuit, tempCardValue};
             cards[noCards] = card;
-            printf("specific; %c%c\n",card.cardValue,card.cardSuit);
-            printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
+            //printf("specific; %c%c\n",card.cardValue,card.cardSuit);
+            //printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
             cards[noCards].next=NULL;
             cards[noCards].prev=NULL;
             cards[noCards].trueValue= charConverter(cards[noCards].cardValue);
@@ -75,22 +75,25 @@ int main() {
                 blackCards[noBlackCards] = cards[noCards];
                 noBlackCards++;
             }
-            printf("Number of red cards : %d\r\n", noRedCards);
-            printf("Number of black cards : %d\r\n", noBlackCards);
+           //printf("Number of red cards : %d\r\n", noRedCards);
+           // printf("Number of black cards : %d\r\n", noBlackCards);
             noCards++;
+
         }
+
     }
+    // Initialize the deck
+    Card* deck = NULL;
 
-
-
-
-
+    for (int i = 0; i < 52; i++) {
+        insert_card(&deck, cards[i].cardSuit, cards[i].cardValue);
+    }
 
 
     // Print the cards in 7 columns
     printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
     printf("\n");
-    for (int i = 0; i < noCards; i += 7) {
+   /* for (int i = 0; i < noCards; i += 7) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
         if (i + 1 < noCards) printf("%c%c\t", cards[i+1].cardValue, cards[i+1].cardSuit);
         if (i + 2 < noCards) printf("%c%c\t", cards[i+2].cardValue, cards[i+2].cardSuit);
@@ -99,6 +102,12 @@ int main() {
         if (i + 5 < noCards) printf("%c%c\t", cards[i+5].cardValue, cards[i+5].cardSuit);
         if (i + 6 < noCards) printf("%c%c\n", cards[i+6].cardValue, cards[i+6].cardSuit);
         else printf("\n");
+    }*/
+    for (int i = 0; i < noCards; i += 7) {
+        for (int j = 0; j < 7 && i+j < noCards; j++) {
+            printf("%c%c\t", cards[i+j].cardValue, cards[i+j].cardSuit);
+        }
+        printf("\n");
     }
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
@@ -160,3 +169,5 @@ void shuffleCards(Card *cards, int noCards){
     }
 
 }*/
+
+

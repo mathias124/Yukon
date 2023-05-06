@@ -30,7 +30,20 @@ Card getLastCard(Link link1);
 
 
 
+void print_cards(Card* head) {
+    while (head != NULL) {
+        printf("%c%c\t ", head->cardValue, head->cardSuit);
+        head = head->next;
+    }
+}
 
+void insert_card(Card** head, char suit, char value) {
+    Card* new_card = (Card*) malloc(sizeof(Card));
+    new_card->cardSuit = suit;
+    new_card->cardValue = value;
+    new_card->next = *head;
+    *head = new_card;
+}
 
 
 
