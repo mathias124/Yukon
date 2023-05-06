@@ -89,8 +89,8 @@ int main() {
     for (int i = 0; i < 52; i++) {
         insert_card(&deck, cards[i].cardSuit, cards[i].cardValue);
     }
-    Card* column[7] = {NULL};
-    Card* foundation[4] = {NULL};
+    Card* column[52] = {NULL};
+    Card* foundation[52] = {NULL};
     for (int i = 0; i < 7; i++) {
         for (int j = i; j < 7; j++) {
             insert_card(&column[j], deck->cardSuit, deck->cardValue);
@@ -104,7 +104,7 @@ int main() {
         }
 
     // Print the cards in 7 columns
-    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
+
     printf("\n");
    /*for (int i = 0; i < noCards; i += 7) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
@@ -123,10 +123,19 @@ int main() {
         printf("\n");
     }*/
     printf("modulus 7 method\n");
+    int k  = 0;
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
     for(int i = 0; i <= noCards; i++){
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
         if((i+1) % 7 == 0){
-            printf("\n");
+            k++;
+            if(k <= 4){
+                printf("\t\t");
+                print_cards(foundation);
+                printf("%s%d\n","F",k);
+            } else{
+                printf("\n");
+            }
         }
     }
     printf("\n");
@@ -136,6 +145,7 @@ int main() {
     printf("%s\n", "MESSAGE: ");
     // intput
     printf("%s\n", "INPUT > ");
+
 
 
 
