@@ -6,6 +6,7 @@
 #include "card.h"
 #include "readFile.h"
 #include "Links.h"
+#include "Prints.h"
 
 
 
@@ -19,17 +20,17 @@ int main() {
     bool Undo = false;
     char commandBuff[BUFSIZ];
     LinkedLists AllList;
-    AllList.list[0]=&c1;
-    AllList.list[1]=&c2;
-    AllList.list[2]=&c3;
-    AllList.list[3]=&c4;
-    AllList.list[4]=&c5;
-    AllList.list[5]=&c6;
-    AllList.list[6]=&c7;
-    AllList.list[7]=&a1;
-    AllList.list[8]=&a2;
-    AllList.list[9]=&a3;
-    AllList.list[10]=&a4;
+    AllList.list[0] = &c1;
+    AllList.list[1] = &c2;
+    AllList.list[2] = &c3;
+    AllList.list[3] = &c4;
+    AllList.list[4] = &c5;
+    AllList.list[5] = &c6;
+    AllList.list[6] = &c7;
+    AllList.list[7] = &a1;
+    AllList.list[8] = &a2;
+    AllList.list[9] = &a3;
+    AllList.list[10] = &a4;
 
 
 
@@ -65,10 +66,9 @@ int main() {
             cards[noCards] = card;
             printf("specific; %c%c\n", card.cardValue, card.cardSuit);
             printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
-            cards[noCards].next=NULL;
-            cards[noCards].prev=NULL;
-            cards[noCards].trueValue= charConverter(cards[noCards].cardValue);
-
+            cards[noCards].next = NULL;
+            cards[noCards].prev = NULL;
+            cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
 
 
             if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
@@ -102,28 +102,46 @@ int main() {
     printf("\n");
     for (int i = 0; i < noCards; i += 7) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
-        insert(&cards[i],&c1);
-        if (i + 1 < noCards) {printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
-            insert(&cards[i],&c2);}
-        if (i + 2 < noCards) { printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
-            insert(&cards[i],&c3);}
-        if (i + 3 < noCards){ printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
-            insert(&cards[i],&c4);}
-        if (i + 4 < noCards) { printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
-            insert(&cards[i],&c5);}
-        if (i + 5 < noCards){ printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
-            insert(&cards[i],&c6);}
+        insert(&cards[i], &c1);
+        cards[i].column=0;
+        if (i + 1 < noCards) {
+            printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
+            insert(&cards[i + 1], &c2);
+            cards[i+1].column=1;
+        }
+        if (i + 2 < noCards) {
+            printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
+            insert(&cards[i + 2], &c3);
+            cards[i+2].column=2;
+        }
+        if (i + 3 < noCards) {
+            printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
+            insert(&cards[i + 3], &c4);
+            cards[i+3].column=3;
+        }
+        if (i + 4 < noCards) {
+            printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
+            insert(&cards[i + 4], &c5);
+            cards[i+4].column=4;
+        }
+        if (i + 5 < noCards) {
+            printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
+            insert(&cards[i + 5], &c6);
+            cards[i+5].column=5;
+        }
         if (i + 6 < noCards) {
             //Makes a tab after line C7 and using the for loop to count A foundations.
-            insert(&cards[i],&c7);
+            insert(&cards[i + 6], &c7);
+            //cards[i+6].column=6;
             if (i / 7 + 1 <= 4) {
                 printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
                 printf("[A%d]\t", i / 7 + 1);
             } else {
                 printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
+                //   insert(&cards[i+6],&c7);
             }
         } else {
-           // printf("[ ]\t[ ]\t");
+            // printf("[ ]\t[ ]\t");
         }//This is for line F/9, so it only contains 4 rows.
         if (i / 7 + 1 <= 4) printf("F%d", i / 7 + 1);
 
@@ -142,23 +160,6 @@ int main() {
 
 
 
-   // insert(&cards[2], &c1);
-    //cards[1].prev=&c1.start;
-    //cards[1].next=&c1.end;
-    //SuperInsert(&cards[1],&cards[2],&AllList);
-
-
-
-
-    //remove_last_card(c1);
-    //remove_last_card(c1);
-
-  //  Card found=LAstCard(c1);
-
-
-
-
-  //  Card  th = *list->next;
 
 
 
@@ -175,49 +176,59 @@ int main() {
     while (GameOpen) {
 
         fgets(commandBuff, BUFSIZ, stdin);
-            if (strcmp(commandBuff, "QQ\n") == 0||strcmp(commandBuff, "qq\n") == 0){
-                GameOpen = false;
-            }
-
-        if(strcmp(commandBuff,"SR\n") ==0||strcmp(commandBuff,"sr\n") ==0) {
+        if (strcmp(commandBuff, "QQ\n") == 0 || strcmp(commandBuff, "qq\n") == 0) {
+            GameOpen = false;
+        } else if (strcmp(commandBuff, "SR\n") == 0 || strcmp(commandBuff, "sr\n") == 0) {
             ////////// Experimental commands
-            shuffleCards(cards, noCards);
+
             printf("Shuffled Cards:\n");
             for (int i = 0; i < noCards; i++) {
                 printf("%c\n", cards[i].cardValue);
             }
             //GameOpen = false;
         }
-        //Undo commando.
-        if(strcmp(commandBuff,"U\n") ==0 || strcmp(commandBuff,"u\n") ==0){}
-        Undo = true;
+            //Undo commando.
+        else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
+            Undo = true;
 
-    }
-    ///Redo Command
-    if(strcmp(commandBuff,"R\n") ==0) {
-        if (Undo == true) {
-            //Needs to be undone, before redo is available.
         }
+            ///Redo Command
+        else if (strcmp(commandBuff, "R\n") == 0) {
+            if (Undo == true) {
+                //Needs to be undone, before redo is available.
+            }
+        } else {
+
+
+            Card *FromCard = getCard('S', 'Q', &AllList);
+            Card *toCard = getCard('S', 'T', &AllList);
+            Card **f = &FromCard;
+            Card **t = &toCard;
+            SuperInsert(f, t, &AllList);
+            printf("%c%c%d", FromCard->cardSuit, FromCard->cardValue, FromCard->column);
+            printf("\n");
+            printf("%c%c%d", toCard->cardSuit, toCard->cardValue, toCard->column);
+            printf("\n");
+
+            CreateBoard();
+
+        }
+
+
+
+
     }
-        return 0;
-
-
-
-
-
-
-    return 0;
-}
-// placeholder shuffle method
+    return 0;}
     void shuffleCards(Card *cards, int noCards) {
-    //Created random seed for cards, so every start is random.
-    srand(time(NULL));
-    for (int i = noCards - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        Card temp = cards[i];
-        cards[i] = cards[j];
-        cards[j] = temp;
+        //Created random seed for cards, so every start is random.
+        srand(time(NULL));
+        for (int i = noCards - 1; i > 0; i--) {
+            int j = rand() % (i + 1);
+            Card temp = cards[i];
+            cards[i] = cards[j];
+            cards[j] =  temp;
+
+        }
 
     }
-
-}
+// placeholder shuffle method
