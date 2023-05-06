@@ -19,13 +19,13 @@ typedef struct LinkedLists {
     Link *list[11];
 } LinkedLists;
 
-int SuperInsert(Card* card1, Card* card2,LinkedLists*lists);
+int SuperInsert(Card** card1, Card** card2,LinkedLists*lists);
 
 int InsertAllowd(Card *card,Card *card2);
 int charConverter(char c);
 int insert(Card *card, Link *link);
 int RemoveLastCard(Link * link);
-Card getCard(char suit, char value, LinkedLists* lists);
+Card *getCard(char suit, char value, LinkedLists* lists);
 Card getLastCard(Link link1);
 
 
@@ -133,21 +133,11 @@ int charConverter(char c) {
     }
 }
 
-int InsertAllowd(Card *card, Card *card2) {
-    if (card->cardSuit == card2->cardSuit || card->column==card2->column||card->trueValue >=card2->trueValue ) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
 int remove_last_card( Link *link) {
     Card *cur = link->end.prev;
     Card *prev = link->end.prev->prev;
 
-    // If the list is empty or only has Done card, return an error
-    if (cur == &(link->start)) {
-        return 1;
-    }
+
 
     // Remove the last card from the list
     prev->next = &(link->end);
@@ -156,40 +146,51 @@ int remove_last_card( Link *link) {
 
     return 0;
 }
-int SuperInsert(Card* card1, Card* card2, LinkedLists* lists) {
-    Card end = lists->list[card1->column]->end;
-
-
-    // remove cards from the old list
-
-    Card pre=*card1->prev;
-   card1->prev=&end;
-    pre.next=&end;
-    end.prev=&pre;
+int SuperInsert(Card** card1, Card** card2, LinkedLists* lists) {
+    Card * card10 =*card1;
+    Card * card20 =*card2;
+    Card * pre =card10->prev;
+    Card * ne=card20->next;
+    Card * L=lists->list[card10->column]->end.prev;
 
 
 
-    // insert cards into the new list
-    insert(card1,lists->list[card2->column]);
+// remove cards from the old list
+   pre->next= &lists->list[card10->column]->end;
+    lists->list[card10->column]->end.prev=card10->prev->next;
 
 
-    // update the column of the moved cards
-    Card* curr = card1;
-    while (curr != NULL) {
-        curr->column = card2->column;
-        curr = curr->next;
-    }
 
-    return 1;
+
+// insert cards into the new list
+
+ card10->prev=card20;
+ card20->next=card10;
+    ne->prev=L;
+    L->next=ne;
+
+
+
+ //update the column of the moved cards
+Card* curr = card10;
+while (curr->cardSuit!='n') {
+curr->column = card20->column;
+curr = curr->next;
+}
+curr->next=&lists->list[card20->column]->end;;
+
+
+return 1;
+
 }
 
-Card getCard(char suit, char value, LinkedLists* lists) {
+Card * getCard(char suit, char value, LinkedLists* lists) {
     for (int i = 0; i < 7; i++) {
         Link* link = lists->list[i];
         Card* current = &(link->start);
         while (current != NULL) {
             if (current->cardSuit == suit && current->cardValue == value) {
-                return *current;
+                return current;
             }
             if (current == &(link->end)) {
                 break;
@@ -197,7 +198,7 @@ Card getCard(char suit, char value, LinkedLists* lists) {
             current = current->next;
         }
     }
-    return lists->list[0]->start;
+    return NULL;
 }
 
 
@@ -212,51 +213,51 @@ Link c1 = {
 
 };
 Link c2 = {
-        .start = {'m', 0, 0,0,0, &c2.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &c2.start},
+        .start = {'m', 0, 0,1,0, &c2.end, NULL},
+        .end = {'n', 0, 0,1,0, NULL, &c2.start},
         .Coloumn=0
 };
 Link c3 = {
-        .start = {'m', 0, 0,0,0, &c3.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &c3.start},
+        .start = {'m', 0, 0,2,0, &c3.end, NULL},
+        .end = {'n', 0, 0,2,0, NULL, &c3.start},
         .Coloumn=1
 };
 Link c4 = {
-        .start = {'m', 0, 0,0,0, &c4.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &c4.start},
+        .start = {'m', 0, 0,3,0, &c4.end, NULL},
+        .end = {'n', 0, 0,3,0, NULL, &c4.start},
         .Coloumn=2
 };
 Link c5 = {
-        .start = {'m', 0, 0,0,0, &c5.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &c5.start},
+        .start = {'m', 0, 0,4,0, &c5.end, NULL},
+        .end = {'n', 0, 0,4,0, NULL, &c5.start},
         .Coloumn=3
 };
 Link c6 = {
-        .start = {'m', 0, 0,0,0, &c6.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &c6.start},
+        .start = {'m', 0, 0,5,0, &c6.end, NULL},
+        .end = {'n', 0, 0,5,0, NULL, &c6.start},
         .Coloumn=5
 };
 Link c7 = {
-        .start = {'m', 0, 0,0,0, &c7.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &c7.start},
+        .start = {'m', 0, 0,6,0, &c7.end, NULL},
+        .end = {'n', 0, 0,6,0, NULL, &c7.start},
         .Coloumn=6
 };
 Link a1 = {
-        .start = {'m', 0, 0,0,0, &a1.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &a1.start},
+        .start = {'m', 0, 0,7,0, &a1.end, NULL},
+        .end = {'n', 0, 0,7,0, NULL, &a1.start},
         .Coloumn=7
 };
 Link a2 = {
-        .start = {'m', 0, 0,0,0, &a2.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &a2.start},
+        .start = {'m', 0, 0,8,0, &a2.end, NULL},
+        .end = {'n', 0, 0,8,0, NULL, &a2.start},
         .Coloumn=8
 };Link a3 = {
-        .start = {'m', 0, 0,0,0, &a3.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &a3.start},
+        .start = {'m', 0, 0,9,0, &a3.end, NULL},
+        .end = {'n', 0, 0,9,0, NULL, &a3.start},
         .Coloumn=9
 };Link a4 = {
-        .start = {'m', 0, 0,0,0, &a4.end, NULL},
-        .end = {'n', 0, 0,0,0, NULL, &a4.start},
+        .start = {'m', 0, 0,10,0, &a4.end, NULL},
+        .end = {'n', 0, 0,10,0, NULL, &a4.start},
         .Coloumn=10
 };
 
