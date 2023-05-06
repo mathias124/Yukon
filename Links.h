@@ -113,21 +113,27 @@ int remove_last_card( Link *link) {
 int SuperInsert(Card** card1, Card** card2, LinkedLists* lists) {
     Card * card10 =*card1;
     Card * card20 =*card2;
-    Card pre =*card10->prev;
+    Card * pre =card10->prev;
+    Card * ne=card20->next;
+    Card * L=lists->list[card10->column]->end.prev;
 
 
 
 // remove cards from the old list
-   pre.next= &lists->list[card10->column]->end;
+   pre->next= &lists->list[card10->column]->end;
     lists->list[card10->column]->end.prev=card10->prev->next;
 
 
 
 
 // insert cards into the new list
- card20->next->prev=card10;
- card10->next=card20->next->prev;
+
+ card10->prev=card20;
  card20->next=card10;
+    ne->prev=L;
+    L->next=ne;
+
+
 
  //update the column of the moved cards
 Card* curr = card10;

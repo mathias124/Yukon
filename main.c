@@ -201,7 +201,9 @@ int main() {
         } else {
             if (strcmp(commandBuff, "t\n") == 0) {
 
-                remove_last_card(&c2);
+               Card *t= getCard('H','4',&AllList);
+                Card *s= getCard('D','Q',&AllList);
+                SuperInsert(&s,&t,&AllList);
 
             }
             CreateBoard();
