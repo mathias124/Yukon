@@ -101,10 +101,7 @@ int remove_last_card( Link *link) {
     Card *cur = link->end.prev;
     Card *prev = link->end.prev->prev;
 
-    // If the list is empty or only has Done card, return an error
-    if (cur == &(link->start)) {
-        return 1;
-    }
+
 
     // Remove the last card from the list
     prev->next = &(link->end);
@@ -116,13 +113,14 @@ int remove_last_card( Link *link) {
 int SuperInsert(Card** card1, Card** card2, LinkedLists* lists) {
     Card * card10 =*card1;
     Card * card20 =*card2;
+    Card pre =*card10->prev;
 
 
 
 // remove cards from the old list
-    card10->prev->next= &lists->list[card10->column]->end;
+   pre.next= &lists->list[card10->column]->end;
     lists->list[card10->column]->end.prev=card10->prev->next;
-    card10->prev=NULL;
+
 
 
 

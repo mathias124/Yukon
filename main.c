@@ -198,18 +198,11 @@ int main() {
                 //Needs to be undone, before redo is available.
             }
         } else {
+            if (strcmp(commandBuff, "t\n") == 0) {
 
+                remove_last_card(&c2);
 
-            Card *FromCard = getCard('S', 'Q', &AllList);
-            Card *toCard = getCard('S', 'T', &AllList);
-            Card **f = &FromCard;
-            Card **t = &toCard;
-            SuperInsert(f, t, &AllList);
-            printf("%c%c%d", FromCard->cardSuit, FromCard->cardValue, FromCard->column);
-            printf("\n");
-            printf("%c%c%d", toCard->cardSuit, toCard->cardValue, toCard->column);
-            printf("\n");
-
+            }
             CreateBoard();
 
         }
