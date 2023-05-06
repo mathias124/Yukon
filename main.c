@@ -84,49 +84,23 @@ int main() {
 
     }
     // Initialize the deck
-    Card* deck = NULL;
 
-    for (int i = 0; i < 52; i++) {
-        insert_card(&deck, cards[i].cardSuit, cards[i].cardValue);
-    }
     Card* column[52] = {NULL};
-    Card* foundation[52] = {NULL};
-    for (int i = 0; i < 7; i++) {
-        for (int j = i; j < 7; j++) {
-            insert_card(&column[j], deck->cardSuit, deck->cardValue);
-            deck = deck->next;
-        }
-    }
-    for (int i = 0; i < 7; i++) {
-            print_cards(column[i]);
-            printf("\t");
-            printf("\n");
-        }
 
     // Print the cards in 7 columns
 
     printf("\n");
-   /*for (int i = 0; i < noCards; i += 7) {
-        printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
-        if (i + 1 < noCards) printf("%c%c\t", cards[i+1].cardValue, cards[i+1].cardSuit);
-        if (i + 2 < noCards) printf("%c%c\t", cards[i+2].cardValue, cards[i+2].cardSuit);
-        if (i + 3 < noCards) printf("%c%c\t", cards[i+3].cardValue, cards[i+3].cardSuit);
-        if (i + 4 < noCards) printf("%c%c\t", cards[i+4].cardValue, cards[i+4].cardSuit);
-        if (i + 5 < noCards) printf("%c%c\t", cards[i+5].cardValue, cards[i+5].cardSuit);
-        if (i + 6 < noCards) printf("%c%c\n", cards[i+6].cardValue, cards[i+6].cardSuit);
-        else printf("\n");
-    }*/
-    /*for (int i = 0; i < noCards; i += 7) {
-        for (int j = 0; j < 7 && i+j < noCards; j++) {
-            printf("%c%c\t", cards[i+j].cardValue, cards[i+j].cardSuit);
-        }
-        printf("\n");
-    }*/
+
+
+    /*int k  = 0;
+
+
     printf("modulus 7 method\n");
-    int k  = 0;
     printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
-    for(int i = 0; i <= noCards; i++){
-        printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
+    for(int i = 0; i <= 52; i++){
+        //printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
+        insert_card(&deck, cards[i].cardSuit, cards[i].cardValue);
+        printf("%c%c\t", deck->cardValue, deck->cardSuit);
         if((i+1) % 7 == 0){
             k++;
             if(k <= 4){
@@ -137,7 +111,9 @@ int main() {
                 printf("\n");
             }
         }
-    }
+    }*/
+    Card* deck = NULL;
+    SW(deck);
     printf("\n");
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
@@ -200,5 +176,7 @@ void shuffleCards(Card *cards, int noCards){
     }
 
 }*/
+
+
 
 
