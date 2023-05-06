@@ -168,10 +168,10 @@ int main() {
 
 
 
-    insert(&cards[2], &c1);
+    /*insert(&cards[2], &c1);
     cards[1].prev=&c1.start;
     cards[1].next=&c1.end;
-    SuperInsert(&cards[1],&cards[2],&AllList);
+    SuperInsert(&cards[1],&cards[2],&AllList);*/
 
 
 
