@@ -214,6 +214,9 @@ int main() {
                 printf("%c\n", cards[i].cardValue);
             }
             //GameOpen = false;
+        }else if (strcmp(commandBuff, "sw\n") == 0 || strcmp(commandBuff, "SW\n") == 0) {
+            Card* deck = NULL;
+            SW(deck);
         }
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
