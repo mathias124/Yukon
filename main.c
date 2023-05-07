@@ -213,10 +213,10 @@ int main() {
                     if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
                         SuperInsert(&s, &t, &AllList);
                         strcpy(message,"ok");
-                        printf("%s\n", message);
+
                     } else{
                         strcpy(message,"Invalid");
-                        printf("%s\n", message);
+
                     }
 
                 }
