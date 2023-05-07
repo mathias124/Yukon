@@ -1,9 +1,8 @@
+#pragma once
 #include "card.h"
 
 #ifndef UNTITLED1_LIST_H
 #define UNTITLED1_LIST_H
-
-#endif //UNTITLED1_LIST_H
 typedef struct Node {
     Card card;
     struct Node* next;
@@ -21,4 +20,6 @@ void removeCardAt(List* list, int index);
 int  getIndexOf(List* list, Card card);
 Card getCardAt(List* list, int index);
 Card popCardAt(List* list, int index);
+
+#endif //UNTITLED1_LIST_H
 
