@@ -19,7 +19,7 @@ int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
     bool GameOpen = true;
     bool Undo = false;
-    char commandBuff[BUFSIZ];
+    char commandBuff[20];
     LinkedLists AllList;
     char  message [8];
     AllList.list[0] = &c1;
@@ -108,7 +108,7 @@ int main() {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
         insert(&cards[i], &c1);
         cards[i].column=0;
-        cards[i].Hidden=1;
+        //cards[i].Hidden=1;
         if (i + 1 < noCards) {
             printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
             insert(&cards[i + 1], &c2);
@@ -161,17 +161,6 @@ int main() {
     // intput
     printf("%s\n", "INPUT > ");
 
-
-
-
-
-
-
-
-
-
-
-
     // Read the file into the buffer
     fread(memoryBuff, sizeof(char), file_size, file);
     // Close the file
@@ -218,7 +207,7 @@ int main() {
                 } else
                     strcpy(message,"Invalid");
 
-            CreateBoard(&message,&commandBuff);
+            CreateBoard(message,commandBuff);
 
         }
 

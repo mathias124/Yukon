@@ -15,6 +15,7 @@
 
 
 
+
 void CreateBoard(char *message, char *lastCommand);
 
 void CreateBoard(char *message, char *lastCommand){
@@ -146,9 +147,6 @@ printf("LAST Command: %s",lastCommand);
 printf("MESSAGE: %s\n", message);
 // intput
 printf("%s\n", "INPUT > ");
-
-
-
 
 
 }
