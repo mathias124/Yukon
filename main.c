@@ -206,8 +206,6 @@ int main() {
             }
         } else  {
 
-
-
                Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
                 Card *s= getCard(commandBuff[1],commandBuff[0],&AllList);
                 if(s!=NULL && t!=NULL ) {
