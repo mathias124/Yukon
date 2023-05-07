@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <libc.h>
 #include <stdbool.h>
 #include <time.h>
 #include <string.h>
@@ -65,11 +66,11 @@ int main() {
         if (res == 2) {
             card = (Card) {tempCardSuit, tempCardValue};
             cards[noCards] = card;
-            printf("specific; %c%c\n", card.cardValue, card.cardSuit);
-            printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
-            cards[noCards].next = NULL;
-            cards[noCards].prev = NULL;
-            cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
+            //printf("specific; %c%c\n",card.cardValue,card.cardSuit);
+            //printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
+            cards[noCards].next=NULL;
+            cards[noCards].prev=NULL;
+            cards[noCards].trueValue= charConverter(cards[noCards].cardValue);
 
 
             if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
@@ -79,11 +80,14 @@ int main() {
                 blackCards[noBlackCards] = cards[noCards];
                 noBlackCards++;
             }
-            printf("Number of red cards : %d\r\n", noRedCards);
-            printf("Number of black cards : %d\r\n", noBlackCards);
+           //printf("Number of red cards : %d\r\n", noRedCards);
+           // printf("Number of black cards : %d\r\n", noBlackCards);
             noCards++;
+
         }
+
     }
+
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
     //shuffleCards(cards, noCards);
@@ -150,6 +154,7 @@ int main() {
         printf("\n");
     }
     printf("\n");
+
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
     // message
@@ -159,6 +164,28 @@ int main() {
 
 
 
+
+
+
+
+    /*insert(&cards[2], &c1);
+    cards[1].prev=&c1.start;
+    cards[1].next=&c1.end;
+    SuperInsert(&cards[1],&cards[2],&AllList);*/
+
+
+
+
+    //remove_last_card(c1);
+    //remove_last_card(c1);
+
+  //  Card found=LAstCard(c1);
+
+
+        printf("Next card after dummy: %c%c\n", c1.start.next->next->next->cardSuit, c1.start.next->next->next->cardValue);
+
+
+  //  Card  th = *list->next;
 
 
 
@@ -187,6 +214,9 @@ int main() {
                 printf("%c\n", cards[i].cardValue);
             }
             //GameOpen = false;
+        }else if (strcmp(commandBuff, "sw\n") == 0 || strcmp(commandBuff, "SW\n") == 0) {
+            Card* deck = NULL;
+            SW(deck);
         }
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
@@ -215,6 +245,7 @@ int main() {
 
     }
     return 0;}
+    // placeholder shuffle method
     void shuffleCards(Card *cards, int noCards) {
         //Created random seed for cards, so every start is random.
         srand(time(NULL));
@@ -227,4 +258,4 @@ int main() {
         }
 
     }
-// placeholder shuffle method
+

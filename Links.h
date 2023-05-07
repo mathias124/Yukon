@@ -30,7 +30,43 @@ Card getLastCard(Link link1);
 
 
 
+void print_cards(Card* head) {
+    while (head != NULL) {
+        printf("%c%c\t ", head->cardValue, head->cardSuit);
+        head = head->next;
+    }
+}
 
+void insert_card(Card** head, char suit, char value) {
+    Card* new_card = (Card*) malloc(sizeof(Card));
+    new_card->cardSuit = suit;
+    new_card->cardValue = value;
+    new_card->next = *head;
+    *head = new_card;
+}
+void SW(Card* deck){
+    int k = 0;
+    Card* foundation[52] = {NULL};
+
+    printf("modulus 7 method\n");
+    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n\n", "C1", "C2", "C3", "C4","C5", "C6", "C7");
+    for(int i = 0; i <= 52; i++){
+        //printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
+        insert_card(&deck, cards[i].cardSuit, cards[i].cardValue);
+        printf("%c%c\t", deck->cardValue, deck->cardSuit);
+        if((i+1) % 7 == 0){
+            k++;
+            if(k <= 4){
+                printf("\t\t");
+                print_cards(foundation);
+                printf("%s%d\n","F",k);
+            } else{
+                printf("\n");
+            }
+        }
+    }
+
+}
 
 
 
