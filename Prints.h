@@ -15,9 +15,9 @@
 
 
 
-void CreateBoard();
+void CreateBoard(char * message, char *lastCommand);
 
-void CreateBoard(){
+void CreateBoard(char * message, char *lastCommand){
 Card *curr1 = c1.start.next;
 Card *curr2 = c2.start.next;
 Card *curr3 = c3.start.next;
@@ -149,9 +149,9 @@ tru=0;
 }
 printf("\n");
 // INITIAL VIEW
-printf("%s\n", "LAST Command:");
+printf( "LAST Command: %s\n",lastCommand);
 // message
-printf("%s\n", "MESSAGE: ");
+printf("MESSAGE: %s\n", message);
 // intput
 printf("%s\n", "INPUT > ");
 

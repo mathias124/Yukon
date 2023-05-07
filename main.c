@@ -21,6 +21,7 @@ int main() {
     bool Undo = false;
     char commandBuff[BUFSIZ];
     LinkedLists AllList;
+    char  message [8];
     AllList.list[0] = &c1;
     AllList.list[1] = &c2;
     AllList.list[2] = &c3;
@@ -211,9 +212,16 @@ int main() {
                 if(s!=NULL && t!=NULL ) {
                     if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
                         SuperInsert(&s, &t, &AllList);
+                        strcpy(message,"ok");
+                        printf("%s\n", message);
+                    } else{
+                        strcpy(message,"Invalid");
+                        printf("%s\n", message);
                     }
+
                 }
-            CreateBoard();
+
+            CreateBoard(&message,&commandBuff);
 
         }
 
