@@ -30,20 +30,29 @@ Card *f2 = a2.start.next;
 Card *f3 = a3.start.next;
 Card *f4 = a4.start.next;
 
+
 printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
 printf("\n");
 int i=0;
 int tru=1;
 while(tru){
 i++;
-if(curr1->cardSuit!='n'){
-printf("%c%c\t", curr1->cardValue, curr1->cardSuit);
+if(curr1->cardSuit!='n') {
+    if (curr1->Hidden == 0)
+        printf("%c%c\t", curr1->cardValue, curr1->cardSuit);
+    else {
+    printf("[]\t");
+}
 curr1 = curr1->next;
 } else{
     printf("\t");
 }
 if(curr2->cardSuit!='n'){
-printf("%c%c\t", curr2->cardValue, curr2->cardSuit);
+    if (curr2->Hidden == 0)
+        printf("%c%c\t", curr2->cardValue, curr2->cardSuit);
+    else {
+        printf("[]\t");
+    }
 curr2 = curr2->next;
 }
 else{
@@ -52,22 +61,32 @@ else{
 
 
 if(curr3->cardSuit!='n'){
-printf("%c%c\t", curr3->cardValue, curr3->cardSuit);
-curr3 = curr3->next;
+    if (curr3->Hidden == 0)
+        printf("%c%c\t", curr3->cardValue, curr3->cardSuit);
+    else {
+        printf("[]\t");
+    }curr3 = curr3->next;
 }
 else{
     printf("\t");
 }
 
 if(curr4->cardSuit!='n'){
-printf("%c%c\t", curr4->cardValue, curr4->cardSuit);
-curr4 = curr4->next;
+    if (curr4->Hidden == 0)
+        printf("%c%c\t", curr4->cardValue, curr4->cardSuit);
+    else {
+        printf("[]\t");
+    }curr4 = curr4->next;
 }
 else{
     printf("\t");
 }
 if(curr5->cardSuit!='n'){
-printf("%c%c\t", curr5->cardValue, curr5->cardSuit);
+    if (curr5->Hidden == 0)
+        printf("%c%c\t", curr5->cardValue, curr5->cardSuit);
+    else {
+        printf("[]\t");
+    }
 curr5 = curr5->next;
 }
 else{
@@ -75,7 +94,11 @@ else{
 }
 
 if(curr6->cardSuit!='n'){
-printf("%c%c\t", curr6->cardValue, curr6->cardSuit);
+    if (curr6->Hidden == 0)
+        printf("%c%c\t", curr6->cardValue, curr6->cardSuit);
+    else {
+        printf("[]\t");
+    }
 curr6 = curr6->next;
 }
 else{
@@ -83,7 +106,11 @@ else{
 }
 
 if(curr7->cardSuit!='n'){
-printf("%c%c\t", curr7->cardValue, curr7->cardSuit);
+    if (curr7->Hidden == 0)
+        printf("%c%c\t", curr7->cardValue, curr7->cardSuit);
+    else {
+        printf("[]\t");
+    }
 curr7 = curr7->next;
 }
 

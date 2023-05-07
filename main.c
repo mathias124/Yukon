@@ -32,6 +32,8 @@ int main() {
     AllList.list[8] = &a2;
     AllList.list[9] = &a3;
     AllList.list[10] = &a4;
+    int mode=0;
+    
 
 
 
@@ -105,6 +107,7 @@ int main() {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
         insert(&cards[i], &c1);
         cards[i].column=0;
+        cards[i].Hidden=1;
         if (i + 1 < noCards) {
             printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
             insert(&cards[i + 1], &c2);
@@ -193,19 +196,25 @@ int main() {
             Undo = true;
 
         }
+        else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
+            mode=1;
+        }
             ///Redo Command
         else if (strcmp(commandBuff, "R\n") == 0) {
             if (Undo == true) {
                 //Needs to be undone, before redo is available.
             }
-        } else {
-            if (strcmp(commandBuff, "t\n") == 0) {
+        } else  {
 
-               Card *t= getCard('H','4',&AllList);
-                Card *s= getCard('D','Q',&AllList);
-                SuperInsert(&s,&t,&AllList);
 
-            }
+
+               Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
+                Card *s= getCard(commandBuff[1],commandBuff[0],&AllList);
+                if(s!=NULL && t!=NULL ) {
+                    if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
+                        SuperInsert(&s, &t, &AllList);
+                    }
+                }
             CreateBoard();
 
         }

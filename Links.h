@@ -141,7 +141,7 @@ while (curr->cardSuit!='n') {
 curr->column = card20->column;
 curr = curr->next;
 }
-curr->next=&lists->list[card20->column]->end;;
+
 
 
 return 1;
@@ -224,6 +224,7 @@ Link a2 = {
         .end = {'n', 0, 0,10,0, NULL, &a4.start},
         .Coloumn=10
 };
+
 
 
 #endif //UNTITLED1_LINK_H
