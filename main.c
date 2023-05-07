@@ -61,6 +61,8 @@ int main() {
         return 1;
     }
     while (!feof(file)) {
+        Card* temCardValue;
+        Card* temCardSuit;
         Card card;
         int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
