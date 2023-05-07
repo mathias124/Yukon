@@ -212,14 +212,11 @@ int main() {
                 if(s!=NULL && t!=NULL ) {
                     if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
                         SuperInsert(&s, &t, &AllList);
-                        strcpy(message,"ok");
-
-                    } else{
-                        strcpy(message,"Invalid");
-
-                    }
-
-                }
+                        strcpy(message,"ok     ");
+                    } else
+                    strcpy(message,"Invalid");
+                } else
+                    strcpy(message,"Invalid");
 
             CreateBoard(&message,&commandBuff);
 
