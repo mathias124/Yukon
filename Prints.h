@@ -15,9 +15,9 @@
 
 
 
-void CreateBoard(char * message, char *lastCommand);
+void CreateBoard(char *message, char *lastCommand);
 
-void CreateBoard(char * message, char *lastCommand){
+void CreateBoard(char *message, char *lastCommand){
 Card *curr1 = c1.start.next;
 Card *curr2 = c2.start.next;
 Card *curr3 = c3.start.next;
@@ -114,8 +114,6 @@ if(curr7->cardSuit!='n'){
 curr7 = curr7->next;
 }
 
-
-
 if(i==1) {
 printf("%c%c\t", f1->cardValue, f1->cardSuit);
 printf("F1");
@@ -135,21 +133,15 @@ printf("%c%c\t", f4->cardValue, f4->cardSuit);
 printf("F4");
 }
 
-
-
-
 printf("\n");
-
-
 
 if(i>13)
 tru=0;
 
-
 }
 printf("\n");
 // INITIAL VIEW
-printf( "LAST Command: %s\n",lastCommand);
+printf("LAST Command: %s",lastCommand);
 // message
 printf("MESSAGE: %s\n", message);
 // intput
