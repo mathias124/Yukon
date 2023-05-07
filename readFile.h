@@ -11,6 +11,7 @@ char *memoryBuff;
 long file_size;
 
 char *file_name = "DATA.txt";
+char * file_save ="shuffled_cards.txt";
 char file_path[1024];
 
 typedef struct ReadFile{

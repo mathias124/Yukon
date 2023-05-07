@@ -9,10 +9,6 @@
 #include "Links.h"
 #include "Prints.h"
 
-
-
-
-
 void getLastCardInDeck(Card *pCard, int cards);
 
 int main() {
@@ -36,7 +32,6 @@ int main() {
     AllList.list[9] = &a3;
     AllList.list[10] = &a4;
     int mode=0;
-    
 
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -44,30 +39,28 @@ int main() {
         perror("getcwd() error");
         exit(EXIT_FAILURE);
     }
-
-    //Filepath for DATA.txt
-    snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
-    printf("File path: %s\n", file_path);
-    file = fopen(file_path, "r");
-    fseek(file, 0, SEEK_END);
-    file_size = ftell(file);// Get the file size
-    rewind(file);
-
-
+//Startmenu screen(input to choose filepath and continue or not.
     while(startMeny ==true && load==false ){
         char userinput[50];
-        printf("Enter 'Y' to conitnue previous file or 'LD' to load previous savefile:");
+        printf("Enter 'Y' to conitnue with a new game  or 'LD' to load previous savefile:");
         printf("\n");
         fgets(userinput,50,stdin);
         if(strcmp(userinput,"Y\n") ==0) {
             startMeny = false;
+            snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
         }else if (strcmp(userinput,"LD\n") ==0) {
             //Load Save.
             printf("loading your save...\n");
             load = true;
+            snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_save);
         } else {
             printf("Invalid command, please enter either Y or LD to continue");
         }
+        printf("File path: %s\n", file_path);
+        file = fopen(file_path, "r");
+        fseek(file, 0, SEEK_END);
+        file_size = ftell(file);// Get the file size
+        rewind(file);
     }
 
     // Allocate memory for the file buffer
@@ -77,10 +70,10 @@ int main() {
         fclose(file);
         return 1;
     }
-    //while (!feof(file)) {
-          while (!feof(file) && startMeny ==false) {
+          while (!feof(file) && startMeny ==false || load ==true) {
         Card card;
-        int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
+       int res;
+            res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
             card = (Card) {tempCardSuit, tempCardValue};
             cards[noCards] = card;
@@ -89,7 +82,6 @@ int main() {
             cards[noCards].next = NULL;
             cards[noCards].prev = NULL;
             cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
-
 
             if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
                 redCards[noRedCards] = cards[noCards];
