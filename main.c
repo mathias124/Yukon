@@ -17,8 +17,10 @@ void getLastCardInDeck(Card *pCard, int cards);
 
 int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
+    bool startMeny = true;
     bool GameOpen = true;
     bool Undo = false;
+    bool load=false;
     char commandBuff[20];
     LinkedLists AllList;
     char  message [8];
@@ -36,10 +38,6 @@ int main() {
     int mode=0;
     
 
-
-
-
-
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
@@ -55,6 +53,23 @@ int main() {
     file_size = ftell(file);// Get the file size
     rewind(file);
 
+
+    while(startMeny ==true && load==false ){
+        char userinput[50];
+        printf("Enter 'Y' to conitnue previous file or 'LD' to load previous savefile:");
+        printf("\n");
+        fgets(userinput,50,stdin);
+        if(strcmp(userinput,"Y\n") ==0) {
+            startMeny = false;
+        }else if (strcmp(userinput,"LD\n") ==0) {
+            //Load Save.
+            printf("loading your save...\n");
+            load = true;
+        } else {
+            printf("Invalid command, please enter either Y or LD to continue");
+        }
+    }
+
     // Allocate memory for the file buffer
     memoryBuff = (char *) malloc(file_size * sizeof(char));
     if (!memoryBuff) {
@@ -62,7 +77,8 @@ int main() {
         fclose(file);
         return 1;
     }
-    while (!feof(file)) {
+    //while (!feof(file)) {
+          while (!feof(file) && startMeny ==false) {
         Card card;
         int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
@@ -208,11 +224,7 @@ int main() {
                     strcpy(message,"Invalid");
 
             CreateBoard(message,commandBuff);
-
         }
-
-
-
 
     }
     return 0;}
