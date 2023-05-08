@@ -107,13 +107,17 @@ void printShowCase(Board* board) {
             }
         }
         if (i == 0) {
-            printf("  [%c1] ", isListEmpty(&(board->foundations[0])) ? ' ' : 'A');
+            printf("  [%c%c] ", isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardValue,
+                                isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardSuit);
         }else if(i == 1){
-            printf("  [%c2] ", isListEmpty(&(board->foundations[1])) ? ' ' : 'B');
+            printf("  [%c%c] ", isListEmpty(&(board->foundations[1].head)) ? ' ' : board->foundations[1].head->card.cardValue,
+                                isListEmpty(&(board->foundations[1].head)) ? ' ' : board->foundations[1].head->card.cardSuit);
         }else if(i == 2){
-            printf("  [%c3] ", isListEmpty(&(board->foundations[2])) ? ' ' : 'C');
+            printf("  [%c%c] ", isListEmpty(&(board->foundations[2].head)) ? ' ' : board->foundations[2].head->card.cardValue,
+                                isListEmpty(&(board->foundations[2].head)) ? ' ' : board->foundations[2].head->card.cardSuit);
         }else if(i == 3){
-            printf("  [%c4] ", isListEmpty(&(board->foundations[3])) ? ' ' : 'D');
+            printf("  [%c%c] ", isListEmpty(&(board->foundations[3].head)) ? ' ' : board->foundations[3].head->card.cardValue,
+                                isListEmpty(&(board->foundations[3].head)) ? ' ' : board->foundations[3].head->card.cardSuit);
         }
         printf("\n");
     }

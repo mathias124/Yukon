@@ -118,6 +118,8 @@ int noCards=0;
 
     Board* board = createBoard(deckList);
     makeShowCaseMode(board);
+    moveColumnToFoundation(board,1,1);
+    moveColumnToFoundation(board,1,1);
     printShowCase(board);
     // Print the cards in 7 columns
     printf("%s\t\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
