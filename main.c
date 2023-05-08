@@ -8,6 +8,7 @@
 #include "readFile.h"
 #include "Links.h"
 #include "Prints.h"
+#include "list.h"
 
 void getLastCardInDeck(Card *pCard, int cards);
 
@@ -32,7 +33,7 @@ int main() {
     AllList.list[9] = &a3;
     AllList.list[10] = &a4;
     int mode=0;
-
+    List* deckList = makeList();
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
@@ -62,6 +63,9 @@ int main() {
         file_size = ftell(file);// Get the file size
         rewind(file);
     }
+int noBlackCards = 0;
+int noRedCards = 0;
+int noCards=0;
 
     // Allocate memory for the file buffer
     memoryBuff = (char *) malloc(file_size * sizeof(char));
@@ -77,6 +81,7 @@ int main() {
         if (res == 2) {
             card = (Card) {tempCardSuit, tempCardValue};
             cards[noCards] = card;
+            addCard(deckList,card);
             printf("specific; %c%c\n", card.cardValue, card.cardSuit);
             printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
             cards[noCards].next = NULL;

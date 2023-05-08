@@ -23,9 +23,9 @@ struct Card redCards[26];
 char tempCardSuit;
 char tempCardValue;
 
-int noBlackCards = 0;
-int noRedCards = 0;
-int noCards=0;
+//int noBlackCards = 0;
+//int noRedCards = 0;
+//int noCards=0;
 
 void shuffleCards(Card *cards, int noCards);
 
