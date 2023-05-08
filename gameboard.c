@@ -49,7 +49,8 @@ void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex) 
 }
 
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex) {
-    // Implementation of moveColumnToColumn function
+    Card card = popCardAt(&board->columns[fromColumnIndex],fromColumnIndex);
+    addCardEnd(&board->columns[toColumnIndex],card);
 }
 
 int getMaxRowCount(Board* board) {

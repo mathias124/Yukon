@@ -147,13 +147,13 @@ int noCards=0;
             makeShowCaseMode(board);
             printShowCase(board);
         }else if(strcmp(commandBuff, "MW\n") == 0 || strcmp(commandBuff, "mw\n") == 0){
-            moveColumnToFoundation(board,1,1);
+            moveColumnToColumn(board,0,6);
             printShowCase(board);
         }
 
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
-            moveFoundationToColumn(board,1,1);
+            moveFoundationToColumn(board,0,0);
             printShowCase(board);
 
         }
