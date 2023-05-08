@@ -66,6 +66,8 @@ int main() {
     }
 
 int noCards=0;
+char tempCardSuit;
+char tempCardValue;
 
     // Allocate memory for the file buffer
     memoryBuff = (char *) malloc(file_size * sizeof(char));
