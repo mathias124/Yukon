@@ -79,12 +79,12 @@ void moveColumnToFoundation(Board* board, int columnIndex, int foundationIndex) 
 }
 
 void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex) {
-    Card card = popCardAt(&board->foundations[foundationIndex],foundationIndex);
+    Card card = popCardAt(&board->foundations[foundationIndex],0);
     addCardEnd(&board->columns[columnIndex],card);
 }
 
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex) {
-    Card card = popCardAt(&board->columns[fromColumnIndex],fromColumnIndex);
+    Card card = popCardAt(&board->columns[fromColumnIndex],0);
     addCardEnd(&board->columns[toColumnIndex],card);
 }
 

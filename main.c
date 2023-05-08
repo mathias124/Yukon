@@ -56,6 +56,7 @@ int main() {
             //Load Save.
             printf("loading your save...\n");
             load = true;
+            startMeny = false;
             snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_save);
         } else {
             printf("Invalid command, please enter either Y or LD to continue");
@@ -68,6 +69,15 @@ int main() {
     }
 
 
+
+
+    // Allocate memory for the file buffer
+    memoryBuff = (char *) malloc(file_size * sizeof(char));
+    if (!memoryBuff) {
+        printf("Error: Could not allocate memory for file buffer\n");
+        fclose(file);
+        return 1;
+    }
     struct Card cards[52];
     struct Card blackCards[26];
     struct Card redCards[26];
@@ -78,14 +88,7 @@ int main() {
     char tempCardSuit;
     char tempCardValue;
 
-    // Allocate memory for the file buffer
-    memoryBuff = (char *) malloc(file_size * sizeof(char));
-    if (!memoryBuff) {
-        printf("Error: Could not allocate memory for file buffer\n");
-        fclose(file);
-        return 1;
-    }
-          while (!feof(file) && startMeny ==false || load ==true) {
+          while (!feof(file) && startMeny ==false) {
         Card card;
        int res;
             res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
@@ -93,22 +96,25 @@ int main() {
             card = (Card) {tempCardSuit, tempCardValue};
             cards[noCards] = card; // To be deleted
             addCard(deckList,card);
-
+            cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
         }
         noCards++;
     }
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
-    //shuffleCards(cards, noCards);
+    //if(load == false) {
+        //shuffleCards(cards, noCards);
+    //}
     FILE *save;
+    //Check the board type. it's different when p or SW
     save = fopen("shuffled_cards.txt", "w");
     if (save == NULL) {
         perror("Error could not create savefile");
         return 1;
     }
-    //for (int i = 0; i < 52; ++i) {
-    //        fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
-    //}
+    for (int i = 0; i < 52; ++i) {
+            fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
+    }
     fclose(save);
     // making a board
 
@@ -151,20 +157,19 @@ int main() {
             makePlayMode(playBoard);
             printShowCase(playBoard);
         }
-
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
             moveColumnToFoundation(board,1,1);
             printShowCase(board);
         }
-        else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
-            mode=1;
-        }
+
             ///Redo Command
         else if (strcmp(commandBuff, "R\n") == 0) {
-            if (Undo == true) {
+            //if (Undo == true) {
+                moveColumnToColumn(board,2,1);
+                printShowCase(board);
                 //Needs to be undone, before redo is available.
-            }
+           // }
         } else  {
 
                Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
