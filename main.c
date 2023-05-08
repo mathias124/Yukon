@@ -121,59 +121,7 @@ int noCards=0;
     moveColumnToFoundation(board,1,1);
     moveColumnToFoundation(board,1,1);
     printShowCase(board);
-    // Print the cards in 7 columns
-    printf("%s\t\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
-    printf("\n");
-    for (int i = 0; i < noCards; i += 7) {
-        printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
-        insert(&cards[i], &c1);
-        cards[i].column=0;
-        //cards[i].Hidden=1;
-        if (i + 1 < noCards) {
-            printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
-            insert(&cards[i + 1], &c2);
-            cards[i+1].column=1;
-        }
-        if (i + 2 < noCards) {
-            printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
-            insert(&cards[i + 2], &c3);
-            cards[i+2].column=2;
-        }
-        if (i + 3 < noCards) {
-            printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
-            insert(&cards[i + 3], &c4);
-            cards[i+3].column=3;
-        }
-        if (i + 4 < noCards) {
-            printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
-            insert(&cards[i + 4], &c5);
-            cards[i+4].column=4;
-        }
-        if (i + 5 < noCards) {
-            printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
-            insert(&cards[i + 5], &c6);
-            cards[i+5].column=5;
-        }
-        if (i + 6 < noCards) {
-            //Makes a tab after line C7 and using the for loop to count A foundations.
-            insert(&cards[i + 6], &c7);
-            //cards[i+6].column=6;
-            if (i / 7 + 1 <= 4) {
-                printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
-                printf("[A%d]\t", i / 7 + 1);
-            } else {
-                printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
-                //   insert(&cards[i+6],&c7);
-            }
-        } else {
-            // printf("[ ]\t[ ]\t");
-        }//This is for line F/9, so it only contains 4 rows.
-        if (i / 7 + 1 <= 4) printf("F%d", i / 7 + 1);
 
-
-        printf("\n");
-    }
-    printf("\n");
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
     // message
