@@ -157,7 +157,7 @@ int noCards=0;
             }
         } else  {
 
-               Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
+               /*Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
                 Card *s= getCard(commandBuff[1],commandBuff[0],&AllList);
                 if(s!=NULL && t!=NULL ) {
                     if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
@@ -166,7 +166,7 @@ int noCards=0;
                     } else
                     strcpy(message,"Invalid");
                 } else
-                    strcpy(message,"Invalid");
+                    strcpy(message,"Invalid");*/
 
             CreateBoard(message,commandBuff);
         }
