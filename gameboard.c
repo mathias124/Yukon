@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+//#include <printf.h>
 #include "gameboard.h"
 #include "list.h"
 
@@ -110,7 +111,7 @@ void printShowCase(Board* board) {
                 printf("[]  ");
             }
         }
-/*
+//
         if (i == 0) {
             printf("  [%c%c] F1 ", isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardValue,
                                 isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardSuit);
@@ -123,9 +124,12 @@ void printShowCase(Board* board) {
         }else if(i == 3){
             printf("  [%c%c] F4 ", isListEmpty(&(board->foundations[3].head)) ? ' ' : board->foundations[3].head->card.cardValue,
                                 isListEmpty(&(board->foundations[3].head)) ? ' ' : board->foundations[3].head->card.cardSuit);
-        }*/
+
+        }
+    //
         printf("\n");
     }
+
 }
 void printShowcaseF(Board* board) {
     printf("   C1  C2  C3  C4  C5  C6  C7   A       F\n");

@@ -65,9 +65,16 @@ int main() {
         rewind(file);
     }
 
-int noCards=0;
-char tempCardSuit;
-char tempCardValue;
+
+    struct Card cards[52];
+    struct Card blackCards[26];
+    struct Card redCards[26];
+    int noBlackCards = 0;
+    int noRedCards = 0;
+    int noCards=0;
+// CARD TYPES
+    char tempCardSuit;
+    char tempCardValue;
 
     // Allocate memory for the file buffer
     memoryBuff = (char *) malloc(file_size * sizeof(char));
@@ -82,6 +89,7 @@ char tempCardValue;
             res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
             card = (Card) {tempCardSuit, tempCardValue};
+            cards[noCards] = card; // To be deleted
             addCard(deckList,card);
 
         }
@@ -127,19 +135,20 @@ char tempCardValue;
             ////////// Experimental commands
 
             printf("Shuffled Cards:\n");
-            /*for (int i = 0; i < noCards; i++) {
+            for (int i = 0; i < noCards; i++) {
                 printf("%c\n", cards[i].cardValue);
-            }*/
+            }
             //GameOpen = false;
         }
         else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0){
             Board* board = createBoard(deckList);
-            free(board);
+            //free(board);
             makeShowCaseMode(board);
             printShowCase(board);
         }else if(strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0){
             Board* playBoard = createBoard(deckList);
-            free(playBoard);
+            //free(playBoard);
+            //test
             makePlayMode(playBoard);
             printShowCase(playBoard);
         }
@@ -158,7 +167,7 @@ char tempCardValue;
             }
         } else  {
 
-               /*Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
+               Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
                 Card *s= getCard(commandBuff[1],commandBuff[0],&AllList);
                 if(s!=NULL && t!=NULL ) {
                     if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
@@ -167,7 +176,7 @@ char tempCardValue;
                     } else
                     strcpy(message,"Invalid");
                 } else
-                    strcpy(message,"Invalid");*/
+                    strcpy(message,"Invalid");
 
             CreateBoard(message,commandBuff);
         }

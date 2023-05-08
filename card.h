@@ -16,9 +16,6 @@ typedef struct {
     Card cards[52];
 }Deck;
 // CARD DECK  FOR NOW
-//struct Card cards[52];
-
-// CARD TYPES
 
 
 //int noBlackCards = 0;
