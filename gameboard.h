@@ -9,7 +9,7 @@ typedef struct Board{
     Card deck[52];
 }Board;
 
-Board createBoard(Card* deck);
+Board* createBoard(Card* deck);
 void makeShowCaseMode(Board* board);
 void makePlayMode(Board* board);
 

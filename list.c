@@ -94,3 +94,17 @@ Card popCardAt(List* list, int index){
     removeCardAt(list,index);
     return card;
 }
+
+void print_list(List* list) {
+    Node* current = list->head;
+
+    printf("List size: %d\n", list->size);
+    printf("Cards in list: ");
+
+    while (current != NULL) {
+        printf("(%c%c) ", current->card.cardSuit, current->card.cardValue);
+        current = current->next;
+    }
+
+    printf("\n");
+}
