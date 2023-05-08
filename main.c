@@ -81,10 +81,8 @@ int noCards=0;
             res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
             card = (Card) {tempCardSuit, tempCardValue};
-            cards[noCards] = card;
+            cards[noCards] = card; // To be deleted
             addCard(deckList,card);
-            printf("specific; %c%c\n", card.cardValue, card.cardSuit);
-            printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
             cards[noCards].next = NULL;
             cards[noCards].prev = NULL;
             cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
@@ -96,8 +94,6 @@ int noCards=0;
                 blackCards[noBlackCards] = cards[noCards];
                 noBlackCards++;
             }
-            printf("Number of red cards : %d\r\n", noRedCards);
-            printf("Number of black cards : %d\r\n", noBlackCards);
             noCards++;
         }
     }

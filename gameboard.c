@@ -96,7 +96,7 @@ void printShowCase(Board* board) {
                 Card card = getCardAt(&(board->columns[j]), i);
                 printf("%c%c\t ", card.cardValue, card.cardSuit);
             } else {
-                printf("   ");
+                printf("[]  ");
             }
         }
         printf(" ");
