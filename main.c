@@ -82,7 +82,6 @@ char tempCardValue;
             res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
             card = (Card) {tempCardSuit, tempCardValue};
-            cards[noCards] = card; // To be deleted
             addCard(deckList,card);
 
         }
@@ -128,9 +127,9 @@ char tempCardValue;
             ////////// Experimental commands
 
             printf("Shuffled Cards:\n");
-            for (int i = 0; i < noCards; i++) {
+            /*for (int i = 0; i < noCards; i++) {
                 printf("%c\n", cards[i].cardValue);
-            }
+            }*/
             //GameOpen = false;
         }
         else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0){
