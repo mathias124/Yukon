@@ -19,6 +19,8 @@ int main() {
     bool GameOpen = true;
     bool Undo = false;
     bool load=false;
+    Board *board;
+    Board *playBoard;
     char commandBuff[20];
     LinkedLists AllList;
     char  message [8];
@@ -138,12 +140,12 @@ int main() {
             //GameOpen = false;
         }
         else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0){
-            Board* board = createBoard(deckList);
+            board = createBoard(deckList);
             //free(board);
             makeShowCaseMode(board);
             printShowCase(board);
         }else if(strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0){
-            Board* playBoard = createBoard(deckList);
+             playBoard = createBoard(deckList);
             //free(playBoard);
             //test
             makePlayMode(playBoard);
@@ -152,7 +154,8 @@ int main() {
 
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
-
+            moveColumnToFoundation(board,1,1);
+            printShowCase(board);
         }
         else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
             mode=1;

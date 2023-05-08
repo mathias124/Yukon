@@ -73,7 +73,7 @@ void makePlayMode(Board* board) {
 
 void moveColumnToFoundation(Board* board, int columnIndex, int foundationIndex) {
     // Implementation of moveColumnToFoundation function
-    Card card = popCardAt(&board->columns[columnIndex],columnIndex);
+    Card card = popCardAt(&board->columns[columnIndex],0);
     addCard(&board->foundations[foundationIndex], card);
 
 }
