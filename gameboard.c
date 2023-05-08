@@ -99,16 +99,16 @@ int getMaxRowCount(Board* board) {
     return maxRowCount;
 }
 void printShowCase(Board* board) {
-    printf("C1 \t C2  C3  C4  C5  C6  C7\t\t\n");
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\t\t\n");
     printf("==========================\n");
     int maxRowCount = getMaxRowCount(board);
     for (int i = 0; i < maxRowCount; i++) {
         for (int j = 0; j < 7; j++) {
             if (i < getListSize(&(board->columns[j]))) {
                 Card card = getCardAt(&(board->columns[j]), i);
-                printf("%c%c\t ", card.cardValue, card.cardSuit);
+                printf("%c%c\t", card.cardValue, card.cardSuit);
             } else {
-                printf("[]  ");
+                printf("[]\t");
             }
         }
 //
