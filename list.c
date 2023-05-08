@@ -96,3 +96,6 @@ Card popCardAt(List* list, int index){
     removeCardAt(list,index);
     return card;
 }
+int getListSize(List* list) {
+    return list->size;
+}

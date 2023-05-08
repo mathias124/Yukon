@@ -13,11 +13,13 @@ typedef struct Board{
 }Board;
 
 Board* createBoard(List* deck);
+void printShowCase(Board* board);
 void makeShowCaseMode(Board* board);
 void makePlayMode(Board* board);
 
 void moveColumnToFoundation(Board* board, int columnIndex, int foundationIndex);
 void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex);
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex);
+void printBoard(Board* board);
 
 #endif //UNTITLED1_GAMEBOARD_H

@@ -118,8 +118,9 @@ int noCards=0;
 
     Board* board = createBoard(deckList);
     makeShowCaseMode(board);
+    printShowCase(board);
     // Print the cards in 7 columns
-    printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
+    printf("%s\t\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
     printf("\n");
     for (int i = 0; i < noCards; i += 7) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
