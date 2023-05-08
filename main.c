@@ -10,7 +10,7 @@
 #include "Prints.h"
 
 void getLastCardInDeck(Card *pCard, int cards);
-
+//Test
 int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
     bool startMeny = true;
@@ -39,7 +39,7 @@ int main() {
         perror("getcwd() error");
         exit(EXIT_FAILURE);
     }
-//Startmenu screen(input to choose filepath and continue or not.
+//Startmenu screen(input to choose filepath and continue or not. By doing this method it saves some memory and performance.
     while(startMeny ==true && load==false ){
         char userinput[50];
         printf("Enter 'Y' to conitnue with a new game  or 'LD' to load previous savefile:");
