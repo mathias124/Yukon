@@ -62,7 +62,7 @@ int getMaxRowCount(Board* board) {
     return maxRowCount;
 }
 void printShowCase(Board* board) {
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\t\tA\tF\n");
+    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\t\t\n");
     printf("==========================\n");
     int maxRowCount = getMaxRowCount(board);
     for (int i = 0; i < maxRowCount; i++) {
@@ -76,16 +76,16 @@ void printShowCase(Board* board) {
         }
 
         if (i == 0) {
-            printf("  [%c%c] ", isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardValue,
+            printf("  [%c%c] F1 ", isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardValue,
                                 isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardSuit);
         }else if(i == 1){
-            printf("  [%c%c] ", isListEmpty(&(board->foundations[1].head)) ? ' ' : board->foundations[1].head->card.cardValue,
+            printf("  [%c%c] F2", isListEmpty(&(board->foundations[1].head)) ? ' ' : board->foundations[1].head->card.cardValue,
                                 isListEmpty(&(board->foundations[1].head)) ? ' ' : board->foundations[1].head->card.cardSuit);
         }else if(i == 2){
-            printf("  [%c%c] ", isListEmpty(&(board->foundations[2].head)) ? ' ' : board->foundations[2].head->card.cardValue,
+            printf("  [%c%c] F3", isListEmpty(&(board->foundations[2].head)) ? ' ' : board->foundations[2].head->card.cardValue,
                                 isListEmpty(&(board->foundations[2].head)) ? ' ' : board->foundations[2].head->card.cardSuit);
         }else if(i == 3){
-            printf("  [%c%c] ", isListEmpty(&(board->foundations[3].head)) ? ' ' : board->foundations[3].head->card.cardValue,
+            printf("  [%c%c] F4 ", isListEmpty(&(board->foundations[3].head)) ? ' ' : board->foundations[3].head->card.cardValue,
                                 isListEmpty(&(board->foundations[3].head)) ? ' ' : board->foundations[3].head->card.cardSuit);
         }
         printf("\n");
