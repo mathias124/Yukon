@@ -9,6 +9,7 @@
 #include "Links.h"
 #include "Prints.h"
 #include "list.h"
+#include "gameboard.h"
 
 void getLastCardInDeck(Card *pCard, int cards);
 
@@ -113,7 +114,10 @@ int noCards=0;
         fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
     }
     fclose(save);
+    // making a board
 
+    Board* board = createBoard(deckList);
+    makeShowCaseMode(board);
     // Print the cards in 7 columns
     printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
     printf("\n");
