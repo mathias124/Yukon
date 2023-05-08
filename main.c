@@ -64,8 +64,7 @@ int main() {
         file_size = ftell(file);// Get the file size
         rewind(file);
     }
-int noBlackCards = 0;
-int noRedCards = 0;
+
 int noCards=0;
 
     // Allocate memory for the file buffer
@@ -83,19 +82,9 @@ int noCards=0;
             card = (Card) {tempCardSuit, tempCardValue};
             cards[noCards] = card; // To be deleted
             addCard(deckList,card);
-            cards[noCards].next = NULL;
-            cards[noCards].prev = NULL;
-            cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
 
-            if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
-                redCards[noRedCards] = cards[noCards];
-                noRedCards++;
-            } else {
-                blackCards[noBlackCards] = cards[noCards];
-                noBlackCards++;
-            }
-            noCards++;
         }
+        noCards++;
     }
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
@@ -106,13 +95,12 @@ int noCards=0;
         perror("Error could not create savefile");
         return 1;
     }
-    for (int i = 0; i < noCards; ++i) {
-        fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
-    }
+    //for (int i = 0; i < 52; ++i) {
+    //        fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
+    //}
     fclose(save);
     // making a board
 
-    Board* board = createBoard(deckList);
 
 
 
@@ -144,17 +132,19 @@ int noCards=0;
             //GameOpen = false;
         }
         else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0){
+            Board* board = createBoard(deckList);
+            free(board);
             makeShowCaseMode(board);
             printShowCase(board);
-        }else if(strcmp(commandBuff, "MW\n") == 0 || strcmp(commandBuff, "mw\n") == 0){
-            moveColumnToColumn(board,0,6);
-            printShowCase(board);
+        }else if(strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0){
+            Board* playBoard = createBoard(deckList);
+            free(playBoard);
+            makePlayMode(playBoard);
+            printShowCase(playBoard);
         }
 
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
-            moveFoundationToColumn(board,0,0);
-            printShowCase(board);
 
         }
         else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {

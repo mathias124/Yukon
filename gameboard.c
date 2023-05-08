@@ -25,6 +25,7 @@ Board* createBoard(List* deck) {
     }
     return board;
 }
+
 void makeShowCaseMode(Board* board) {
     // Implementation of makeShowCaseMode function
     for (int i = 0; i < 52; i++){
@@ -32,9 +33,42 @@ void makeShowCaseMode(Board* board) {
     }
 }
 
+
 void makePlayMode(Board* board) {
-    // Implementation of makePlayMode function
+    // Deal 1 card in first column
+    addCard(&(board->columns[0]), board->deck[0]);
+
+    // Deal 6 cards in second column
+    for (int i = 1; i <= 6; i++) {
+        addCard(&(board->columns[1]), board->deck[i]);
+    }
+
+    // Deal 7 cards in third column
+    for (int i = 7; i <= 13; i++) {
+        addCard(&(board->columns[2]), board->deck[i]);
+    }
+
+    // Deal 8 cards in fourth column
+    for (int i = 14; i <= 21; i++) {
+        addCard(&(board->columns[3]), board->deck[i]);
+    }
+
+    // Deal 9 cards in fifth column
+    for (int i = 22; i <= 30; i++) {
+        addCard(&(board->columns[4]), board->deck[i]);
+    }
+
+    // Deal 10 cards in sixth column
+    for (int i = 31; i <= 40; i++) {
+        addCard(&(board->columns[5]), board->deck[i]);
+    }
+
+    // Deal 11 cards in seventh column
+    for (int i = 41; i <= 51; i++) {
+        addCard(&(board->columns[6]), board->deck[i]);
+    }
 }
+
 
 void moveColumnToFoundation(Board* board, int columnIndex, int foundationIndex) {
     // Implementation of moveColumnToFoundation function
@@ -64,7 +98,7 @@ int getMaxRowCount(Board* board) {
     return maxRowCount;
 }
 void printShowCase(Board* board) {
-    printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\t\t\n");
+    printf("C1 \t C2  C3  C4  C5  C6  C7\t\t\n");
     printf("==========================\n");
     int maxRowCount = getMaxRowCount(board);
     for (int i = 0; i < maxRowCount; i++) {
