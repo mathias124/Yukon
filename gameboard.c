@@ -3,7 +3,7 @@
 //
 
 #include <stdlib.h>
-#include <printf.h>
+#include <stdio.h>
 #include "gameboard.h"
 #include "list.h"
 
