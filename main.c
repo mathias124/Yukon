@@ -110,9 +110,6 @@ int main() {
     fclose(save);
     // making a board
 
-
-
-
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
     // message
