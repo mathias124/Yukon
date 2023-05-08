@@ -148,6 +148,7 @@ int main() {
         }else if(strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0){
             Board* playBoard = createBoard(deckList);
             //free(playBoard);
+            //test
             makePlayMode(playBoard);
             printShowCase(playBoard);
         }
