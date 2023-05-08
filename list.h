@@ -19,6 +19,7 @@ typedef struct List {
 List* makeList();
 void insertCard(List* list, Card card, int index);
 void addCard(List* list,Card card);
+void addCardEnd(List* list,Card card);
 void removeCard(List* list, Card card);
 void removeCardAt(List* list, int index);
 int  getIndexOf(List* list, Card card);

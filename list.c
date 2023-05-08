@@ -33,9 +33,11 @@ void insertCard(List* list, Card card, int index){
 
 }
 void addCard(List* list,Card card){
+    insertCard(list,card,0);
+}
+void addCardEnd(List* list,Card card){
     insertCard(list,card,list->size);
 }
-
 void removeCard(List* list, Card card){
     int index = getIndexOf(list,card);
     if(index == -1){
