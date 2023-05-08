@@ -92,10 +92,54 @@ int main() {
                 }
                 printf("Number of red cards : %d\r\n", noRedCards);
                 printf("Number of black cards : %d\r\n", noBlackCards);
+                if(noCards<1){
+                    insert(&cards[noCards], &c1);
+                    cards[noCards].column=0;
+                }
+                else if(noCards<7){
+                    insert(&cards[noCards], &c2);
+                    cards[noCards].column=1;
+                    if(noCards<2)
+                    cards[noCards].Hidden=1;
+                }
+                else if(noCards<14){
+                    insert(&cards[noCards], &c3);
+                    cards[noCards].column=2;
+                    if(noCards<9)
+                        cards[noCards].Hidden=1;
+                }
+                else if(noCards<22){
+                    insert(&cards[noCards], &c4);
+                    cards[noCards].column=3;
+                    if(noCards<17)
+                        cards[noCards].Hidden=1;
+                }
+                else if(noCards<31){
+                    insert(&cards[noCards], &c5);
+                    cards[noCards].column=4;
+                    if(noCards<26)
+                        cards[noCards].Hidden=1;
+                }
+                else if(noCards<41){
+                    insert(&cards[noCards], &c6);
+                    cards[noCards].column=5;
+                    if(noCards<36)
+                        cards[noCards].Hidden=1;
+                } else{
+                    insert(&cards[noCards], &c7);
+                    cards[noCards].column=6;
+                    if(noCards<47)
+                        cards[noCards].Hidden=1;
+                }
+
                 noCards++;
             }
         }
 
+    if(noCards!=52){
+        printf("Too few cards.\n" );
+        exit(0);
+    }
 
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
@@ -119,38 +163,30 @@ int main() {
     printf("\n");
     for (int i = 0; i < noCards; i += 7) {
         printf("%c%c\t", cards[i].cardValue, cards[i].cardSuit);
-        insert(&cards[i], &c1);
-        cards[i].column=0;
-        //cards[i].Hidden=1;
+
         if (i + 1 < noCards) {
             printf("%c%c\t", cards[i + 1].cardValue, cards[i + 1].cardSuit);
-            insert(&cards[i + 1], &c2);
-            cards[i+1].column=1;
+
         }
         if (i + 2 < noCards) {
             printf("%c%c\t", cards[i + 2].cardValue, cards[i + 2].cardSuit);
-            insert(&cards[i + 2], &c3);
-            cards[i+2].column=2;
+
         }
         if (i + 3 < noCards) {
             printf("%c%c\t", cards[i + 3].cardValue, cards[i + 3].cardSuit);
-            insert(&cards[i + 3], &c4);
-            cards[i+3].column=3;
+
         }
         if (i + 4 < noCards) {
             printf("%c%c\t", cards[i + 4].cardValue, cards[i + 4].cardSuit);
-            insert(&cards[i + 4], &c5);
-            cards[i+4].column=4;
+
         }
         if (i + 5 < noCards) {
             printf("%c%c\t", cards[i + 5].cardValue, cards[i + 5].cardSuit);
-            insert(&cards[i + 5], &c6);
-            cards[i+5].column=5;
+
         }
         if (i + 6 < noCards) {
             //Makes a tab after line C7 and using the for loop to count A foundations.
-            insert(&cards[i + 6], &c7);
-            //cards[i+6].column=6;
+
             if (i / 7 + 1 <= 4) {
                 printf("%c%c\t", cards[i + 6].cardValue, cards[i + 6].cardSuit);
                 printf("[A%d]\t", i / 7 + 1);
@@ -208,15 +244,16 @@ int main() {
                Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
                 Card *s= getCard(commandBuff[1],commandBuff[0],&AllList);
                 if(s!=NULL && t!=NULL ) {
-                    if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column &&t->next->cardSuit=='n') {
+                  //  if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column &&t->next->cardSuit=='n') {
                         SuperInsert(&s, &t, &AllList);
                         strcpy(message,"ok     ");
-                    } else
-                    strcpy(message,"Invalid");
+                   // } else
+                  //  strcpy(message,"Invalid");
                 } else
                     strcpy(message,"Invalid");
-
+            removeHidden(&AllList);
             CreateBoard(message,commandBuff);
+            printf("%d%c",c2.end.prev->Hidden,c2.end.prev->cardSuit);
 
         }
 
