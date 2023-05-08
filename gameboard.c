@@ -50,32 +50,7 @@ void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex) 
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex) {
     // Implementation of moveColumnToColumn function
 }
-void printBoard(Board* board) {
-    printf("Deck:\n");
-    for (int i = 0; i < 52; i++) {
-        printf("%c%C ", board->deck[i].cardValue, board->deck[i].cardSuit);
-    }
-    printf("\n\nColumns:\n");
-    for (int i = 0; i < 7; i++) {
-        printf("Column %d: ", i+1);
-        Node* current = board->columns[i].head;
-        while (current != NULL) {
-            printf("%c%C ", current->card.cardValue, current->card.cardSuit);
-            current = current->next;
-        }
-        printf("\n");
-    }
-    printf("\nFoundations:\n");
-    for (int i = 0; i < 4; i++) {
-        printf("Foundation %d: ", i+1);
-        Node* current = board->foundations[i].head;
-        while (current != NULL) {
-            printf("%c%C ", current->card.cardValue, current->card.cardSuit);
-            current = current->next;
-        }
-        printf("\n");
-    }
-}
+
 int getMaxRowCount(Board* board) {
     int maxRowCount = 0;
     for (int i = 0; i < 7; i++) {
@@ -99,13 +74,7 @@ void printShowCase(Board* board) {
                 printf("[]  ");
             }
         }
-        printf(" ");
-        if (i < getListSize(&(board->foundations[0]))) {
-            for (int j = 0; j < 4; j++) {
-                Card card = getCardAt(&(board->foundations[j]), i);
-                printf("[%c%d] ", 'A' + j, card.cardValue - 1);
-            }
-        }
+
         if (i == 0) {
             printf("  [%c%c] ", isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardValue,
                                 isListEmpty(&(board->foundations[0].head)) ? ' ' : board->foundations[0].head->card.cardSuit);

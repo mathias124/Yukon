@@ -113,10 +113,8 @@ int noCards=0;
     // making a board
 
     Board* board = createBoard(deckList);
-    makeShowCaseMode(board);
-    moveColumnToFoundation(board,1,1);
-    moveColumnToFoundation(board,1,1);
-    printShowCase(board);
+
+
 
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
@@ -145,6 +143,15 @@ int noCards=0;
             }
             //GameOpen = false;
         }
+        else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0){
+            makeShowCaseMode(board);
+            printShowCase(board);
+        }else if(strcmp(commandBuff, "MW\n") == 0 || strcmp(commandBuff, "mw\n") == 0){
+            moveColumnToFoundation(board,1,1);
+            moveColumnToFoundation(board,1,1);
+            printShowCase(board);
+        }
+
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
             Undo = true;
