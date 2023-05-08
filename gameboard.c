@@ -30,7 +30,7 @@ Board* createBoard(List* deck) {
 void makeShowCaseMode(Board* board) {
     // Implementation of makeShowCaseMode function
     for (int i = 0; i < 52; i++){
-        addCard(&board->columns[i % 7],board->deck[i]);
+        addCardEnd(&board->columns[i % 7],board->deck[i]);
     }
 }
 
