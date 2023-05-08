@@ -27,6 +27,17 @@ int noBlackCards = 0;
 int noRedCards = 0;
 int noCards=0;
 
+void shuffleCards(Card *cards, int noCards) {
+    //Created random seed for cards, so every start is random.
+    srand(time(NULL));
+    for (int i = noCards - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        Card temp = cards[i];
+        cards[i] = cards[j];
+        cards[j] = temp;
+
+    }
+}
 void shuffleCards(Card *cards, int noCards);
 
 Deck makeDeck();

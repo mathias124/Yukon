@@ -8,12 +8,12 @@
 #include "readFile.h"
 #include "Links.h"
 #include "Prints.h"
+#include "validateMove.h"
 
 
 
 
 
-void getLastCardInDeck(Card *pCard, int cards);
 
 int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
@@ -34,6 +34,7 @@ int main() {
     AllList.list[9] = &a3;
     AllList.list[10] = &a4;
     int mode=0;
+    int line;
     
 
 
@@ -63,34 +64,43 @@ int main() {
         return 1;
     }
     while (!feof(file)) {
-        Card card;
+
         int res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
-            card = (Card) {tempCardSuit, tempCardValue};
-            cards[noCards] = card;
-            printf("specific; %c%c\n", card.cardValue, card.cardSuit);
-            printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
-            cards[noCards].next = NULL;
-            cards[noCards].prev = NULL;
-            cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
+            if(!validate(&tempCardSuit, &tempCardValue)){
 
-
-            if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
-                redCards[noRedCards] = cards[noCards];
-                noRedCards++;
-            } else {
-                blackCards[noBlackCards] = cards[noCards];
-                noBlackCards++;
+              line=noCards+1;
+                printf("Invalid input at line %d\n", line);
+                exit(0);
             }
-            printf("Number of red cards : %d\r\n", noRedCards);
-            printf("Number of black cards : %d\r\n", noBlackCards);
-            noCards++;
+                Card card;
+                card = (Card) {tempCardSuit, tempCardValue};
+                cards[noCards] = card;
+                printf("specific; %c%c\n", card.cardValue, card.cardSuit);
+                printf("%c%c\r\n", cards[noCards].cardValue, cards[noCards].cardSuit);
+                cards[noCards].next = NULL;
+                cards[noCards].prev = NULL;
+                cards[noCards].trueValue = charConverter(cards[noCards].cardValue);
+
+
+                if (cards[noCards].cardSuit == 'S' || cards[noCards].cardSuit == 'H') {
+                    redCards[noRedCards] = cards[noCards];
+                    noRedCards++;
+                } else {
+                    blackCards[noBlackCards] = cards[noCards];
+                    noBlackCards++;
+                }
+                printf("Number of red cards : %d\r\n", noRedCards);
+                printf("Number of black cards : %d\r\n", noBlackCards);
+                noCards++;
+            }
         }
-    }
+
+
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
     //shuffleCards(cards, noCards);
-    FILE *save;
+  /* FILE *save;
     save = fopen("shuffled_cards.txt", "w");
     if (save == NULL) {
         perror("Error could not create savefile");
@@ -98,8 +108,11 @@ int main() {
     }
     for (int i = 0; i < noCards; ++i) {
         fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
-    }
-    fclose(save);
+    }*/
+    fclose(file);
+    free(memoryBuff);
+
+
 
     // Print the cards in 7 columns
     printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "A", "F");
@@ -161,15 +174,12 @@ int main() {
     // intput
     printf("%s\n", "INPUT > ");
 
-    // Read the file into the buffer
-    fread(memoryBuff, sizeof(char), file_size, file);
-    // Close the file
-    fclose(file);
-    free(memoryBuff);
+
+
+
     //This methods make the game in a while loop and makes the quit command to close game, furthermore commands.
     while (GameOpen) {
-
-        fgets(commandBuff, BUFSIZ, stdin);
+        fgets(commandBuff, 20, stdin);
         if (strcmp(commandBuff, "QQ\n") == 0 || strcmp(commandBuff, "qq\n") == 0) {
             GameOpen = false;
         } else if (strcmp(commandBuff, "SR\n") == 0 || strcmp(commandBuff, "sr\n") == 0) {
@@ -195,11 +205,10 @@ int main() {
                 //Needs to be undone, before redo is available.
             }
         } else  {
-
                Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
                 Card *s= getCard(commandBuff[1],commandBuff[0],&AllList);
                 if(s!=NULL && t!=NULL ) {
-                    if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
+                    if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column &&t->next->cardSuit=='n') {
                         SuperInsert(&s, &t, &AllList);
                         strcpy(message,"ok     ");
                     } else
@@ -215,17 +224,7 @@ int main() {
 
 
     }
+
     return 0;}
-    void shuffleCards(Card *cards, int noCards) {
-        //Created random seed for cards, so every start is random.
-        srand(time(NULL));
-        for (int i = noCards - 1; i > 0; i--) {
-            int j = rand() % (i + 1);
-            Card temp = cards[i];
-            cards[i] = cards[j];
-            cards[j] =  temp;
 
-        }
 
-    }
-// placeholder shuffle method
