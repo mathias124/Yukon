@@ -148,13 +148,13 @@ int noCards=0;
             printShowCase(board);
         }else if(strcmp(commandBuff, "MW\n") == 0 || strcmp(commandBuff, "mw\n") == 0){
             moveColumnToFoundation(board,1,1);
-            moveColumnToFoundation(board,1,1);
             printShowCase(board);
         }
 
             //Undo commando.
         else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
-            Undo = true;
+            moveFoundationToColumn(board,1,1);
+            printShowCase(board);
 
         }
         else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {

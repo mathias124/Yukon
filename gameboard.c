@@ -44,7 +44,8 @@ void moveColumnToFoundation(Board* board, int columnIndex, int foundationIndex) 
 }
 
 void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex) {
-    // Implementation of moveFoundationToColumn function
+    Card card = popCardAt(&board->foundations[foundationIndex],foundationIndex);
+    addCardEnd(&board->columns[columnIndex],card);
 }
 
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex) {
