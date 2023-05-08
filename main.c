@@ -65,7 +65,16 @@ int main() {
         rewind(file);
     }
 
-int noCards=0;
+
+    struct Card cards[52];
+    struct Card blackCards[26];
+    struct Card redCards[26];
+    int noBlackCards = 0;
+    int noRedCards = 0;
+    int noCards=0;
+// CARD TYPES
+    char tempCardSuit;
+    char tempCardValue;
 
     // Allocate memory for the file buffer
     memoryBuff = (char *) malloc(file_size * sizeof(char));
@@ -133,12 +142,12 @@ int noCards=0;
         }
         else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0){
             Board* board = createBoard(deckList);
-            free(board);
+            //free(board);
             makeShowCaseMode(board);
             printShowCase(board);
         }else if(strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0){
             Board* playBoard = createBoard(deckList);
-            free(playBoard);
+            //free(playBoard);
             makePlayMode(playBoard);
             printShowCase(playBoard);
         }
