@@ -99,3 +99,6 @@ Card popCardAt(List* list, int index){
 int getListSize(List* list) {
     return list->size;
 }
+int isListEmpty(List* list) {
+    return list->head == NULL;
+}

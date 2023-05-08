@@ -14,6 +14,7 @@ typedef struct Board{
 
 Board* createBoard(List* deck);
 void printShowCase(Board* board);
+void printShowcaseF(Board* board);
 void makeShowCaseMode(Board* board);
 void makePlayMode(Board* board);
 

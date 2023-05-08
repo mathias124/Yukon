@@ -106,6 +106,53 @@ void printShowCase(Board* board) {
                 printf("[%c%d] ", 'A' + j, card.cardValue - 1);
             }
         }
+        if (i == 0) {
+            printf("  [%c1] ", isListEmpty(&(board->foundations[0])) ? ' ' : 'A');
+        }else if(i == 1){
+            printf("  [%c2] ", isListEmpty(&(board->foundations[1])) ? ' ' : 'B');
+        }else if(i == 2){
+            printf("  [%c3] ", isListEmpty(&(board->foundations[2])) ? ' ' : 'C');
+        }else if(i == 3){
+            printf("  [%c4] ", isListEmpty(&(board->foundations[3])) ? ' ' : 'D');
+        }
+        printf("\n");
+    }
+}
+void printShowcaseF(Board* board) {
+    printf("   C1  C2  C3  C4  C5  C6  C7   A       F\n");
+    printf("===========================================\n");
+
+    // get the maximum row count across all columns
+    int maxRowCount = getMaxRowCount(board);
+
+    // print each row
+    for (int i = 0; i < maxRowCount; i++) {
+        printf("%c  ", 'A' + i);
+
+        // print each column for the current row
+        for (int j = 0; j < 7; j++) {
+            List *column = &(board->columns[j]);
+            int columnSize = getListSize(column);
+
+            // print the card value and suit if it exists in the current column and row
+            if (columnSize > i) {
+                Card card = getCardAt(column, i);
+                printf("%c%c ", card.cardValue, card.cardSuit);
+            } else {
+                printf("   ");
+            }
+        }
+
+        // print the foundations for the current row
+        if (i == 0) {
+            printf("  [%c1] ", isListEmpty(&(board->foundations[0])) ? ' ' : 'A');
+        }else if(i == 1){
+            printf("  [%c2] ", isListEmpty(&(board->foundations[1])) ? ' ' : 'B');
+        }else if(i == 2){
+            printf("  [%c2] ", isListEmpty(&(board->foundations[1])) ? ' ' : 'B');
+        }else if(i == 3){
+            printf("  [%c3] ", isListEmpty(&(board->foundations[2])) ? ' ' : 'C');
+        }
         printf("\n");
     }
 }
