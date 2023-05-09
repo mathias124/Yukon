@@ -144,8 +144,8 @@ int main() {
             makeShowCaseMode(board);
             printShowCase(board);
         } else if (strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0) {
+            free(playBoard);
             playBoard = createBoard(deckList);
-            //free(playBoard);
             //test
             makePlayMode(playBoard);
             printShowCase(playBoard);
@@ -168,28 +168,28 @@ int main() {
             if (from[0] == 'C' && to[0] == 'F') {
                 int fromColumnIndex = atoi(&from[1]) - 1;
                 int foundationIndex = atoi(&to[1]) - 1;
-                moveColumnToFoundation(board, fromColumnIndex, foundationIndex);
+                moveColumnToFoundation(playBoard, fromColumnIndex, foundationIndex);
             }
 
                 // Move from foundation to column
             else if (from[0] == 'F' && to[0] == 'C') {
                 int foundationIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
-                moveFoundationToColumn(board, foundationIndex, toColumnIndex);
+                moveFoundationToColumn(playBoard, foundationIndex, toColumnIndex);
             }
 
                 // Move from column to column
             else if (from[0] == 'C' && to[0] == 'C') {
                 int fromColumnIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
-                moveColumnToColumn(board, fromColumnIndex, toColumnIndex);
+                moveColumnToColumn(playBoard, fromColumnIndex, toColumnIndex);
                 }
 
                 // Invalid command
             else {
                 printf("Invalid command\n");
             }
-        printShowCase(board);
+        printShowCase(playBoard);
     } //TO:CARD:FROM
     else if (strlen(commandBuff)>6){
         char from[3],card[3],to[3];
@@ -198,15 +198,16 @@ int main() {
             int fromColumnIndex = atoi(&from[1])-1;
             char fromCardValue = card[0];
             char fromCardSuit = card[1];
-            int fromCardIndex = getIndexOfCard(&board->columns[fromColumnIndex],fromCardSuit,fromCardValue);
+            int fromCardIndex = getIndexOfCard(&playBoard->columns[fromColumnIndex],fromCardSuit,fromCardValue);
             int toColumnIndex = atoi(&to[1])-1;
-            if(getCardHiddenStatusAt(&board->columns[fromColumnIndex],fromCardIndex) == 0){
-                moveCardsFromColumnToColumn(board,fromColumnIndex,fromCardIndex,toColumnIndex);
+            int fromHidden = getCardHiddenStatusAt(&playBoard->columns[fromColumnIndex],fromCardIndex);
+            if(fromHidden == 0){
+                moveCardsFromColumnToColumn(playBoard,fromColumnIndex,fromCardIndex,toColumnIndex);
             }
         } else{
             printf("Invalid command\n");
         }
-            printShowCase(board);
+            printShowCase(playBoard);
     }
 
 
