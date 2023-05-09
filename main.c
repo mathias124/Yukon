@@ -99,7 +99,7 @@ int main() {
     }
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
-    if (load = false) {
+    if (load == false) {
         shuffleCards(cards, noCards);
     }
 
