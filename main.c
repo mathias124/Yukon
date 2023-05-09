@@ -21,7 +21,6 @@ int main() {
     bool load=false;
     Board *board;
     Board *playBoard;
-    char commandBuff[20];
     LinkedLists AllList;
     char  message [8];
     AllList.list[0] = &c1;
@@ -55,7 +54,8 @@ int main() {
         }else if (strcmp(userinput,"LD\n") ==0) {
             //Load Save.
             printf("loading your save...\n");
-            load = true;
+            //load = true;
+            startMeny = false;
             snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_save);
         } else {
             printf("Invalid command, please enter either Y or LD to continue");
@@ -85,7 +85,7 @@ int main() {
         fclose(file);
         return 1;
     }
-          while (!feof(file) && startMeny ==false || load ==true) {
+  while (!feof(file) && startMeny ==false) {
         Card card;
        int res;
             res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
@@ -138,50 +138,79 @@ int main() {
                 printf("%c\n", cards[i].cardValue);
             }
             //GameOpen = false;
-        }
-        else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0){
+        } else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0) {
             board = createBoard(deckList);
             //free(board);
             makeShowCaseMode(board);
             printShowCase(board);
-        }else if(strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0){
-             playBoard = createBoard(deckList);
+        } else if (strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0) {
+            playBoard = createBoard(deckList);
             //free(playBoard);
             //test
             makePlayMode(playBoard);
             printShowCase(playBoard);
-        }
+        } else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
 
-            //Undo commando.
-        else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
-            moveColumnToFoundation(board,1,1);
             printShowCase(board);
-        }
-        else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
-            mode=1;
+        } else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
+            mode = 1;
         }
             ///Redo Command
         else if (strcmp(commandBuff, "R\n") == 0) {
             if (Undo == true) {
                 //Needs to be undone, before redo is available.
             }
-        } else  {
+        }// TO:FROM command
+        else if (strlen(commandBuff) > 1 && strlen(commandBuff) < 7) {
+            char from[3], to[3];
+            sscanf(commandBuff, "%2s:%2s", from, to);
+            // Move from column to foundation
+            if (from[0] == 'C' && to[0] == 'F') {
+                int fromColumnIndex = atoi(&from[1]) - 1;
+                int foundationIndex = atoi(&to[1]) - 1;
+                moveColumnToFoundation(board, fromColumnIndex, foundationIndex);
+            }
 
-               Card *t= getCard(commandBuff[4],commandBuff[3],&AllList);
-                Card *s= getCard(commandBuff[1],commandBuff[0],&AllList);
-                if(s!=NULL && t!=NULL ) {
-                    if ( s->trueValue<t->trueValue && s->cardSuit!=t->cardSuit && t->column!=s->column) {
-                        SuperInsert(&s, &t, &AllList);
-                        strcpy(message,"ok     ");
-                    } else
-                    strcpy(message,"Invalid");
-                } else
-                    strcpy(message,"Invalid");
+                // Move from foundation to column
+            else if (from[0] == 'F' && to[0] == 'C') {
+                int foundationIndex = atoi(&from[1]) - 1;
+                int toColumnIndex = atoi(&to[1]) - 1;
+                moveFoundationToColumn(board, foundationIndex, toColumnIndex);
+            }
 
-            CreateBoard(message,commandBuff);
+                // Move from column to column
+            else if (from[0] == 'C' && to[0] == 'C') {
+                int fromColumnIndex = atoi(&from[1]) - 1;
+                int toColumnIndex = atoi(&to[1]) - 1;
+                moveColumnToColumn(board, fromColumnIndex, toColumnIndex);
+                }
+
+                // Invalid command
+            else {
+                printf("Invalid command\n");
+            }
+        printShowCase(board);
+    } //TO:CARD:FROM
+    else if (strlen(commandBuff)>6){
+        char from[3],card[3],to[3];
+        sscanf(commandBuff,"%2s:%2s:%2s",from,card,to);
+        if(from[0] == 'C' && to[0] == 'C'){
+            int fromColumnIndex = atoi(&from[1])-1;
+            char fromCardValue = card[0];
+            char fromCardSuit = card[1];
+            int fromCardIndex = getIndexOfCard(&board->columns[fromColumnIndex],fromCardSuit,fromCardValue);
+            int toColumnIndex = atoi(&to[1])-1;
+            moveCardsFromColumnToColumn(board,fromColumnIndex,fromCardIndex,toColumnIndex);
+        } else{
+            printf("Invalid command\n");
         }
-
+            printShowCase(board);
     }
+
+
+}
+
+
     return 0;}
     void shuffleCards(Card *cards, int noCards) {
         //Created random seed for cards, so every start is random.

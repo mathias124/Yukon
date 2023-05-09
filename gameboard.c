@@ -104,22 +104,30 @@ void makePlayMode(Board* board) {
 
 
 void moveColumnToFoundation(Board* board, int columnIndex, int foundationIndex) {
-    // Implementation of moveColumnToFoundation function
-    Card card = popCardAt(&board->columns[columnIndex],0);
+    if(board->columns[columnIndex].size > 0 && board->foundations[foundationIndex].size < 13){
+    Card card = popCardAt(&board->columns[columnIndex],board->columns[columnIndex].size-1);
     addCard(&board->foundations[foundationIndex], card);
-
+    }
 }
 
 void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex) {
-    Card card = popCardAt(&board->foundations[foundationIndex],foundationIndex);
-    addCardEnd(&board->columns[columnIndex],card);
+    if (board->foundations[foundationIndex].size > 0) {
+        Card card = popCardAt(&board->foundations[foundationIndex], 0);
+        addCardEnd(&board->columns[columnIndex], card);
+    }
 }
-
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex) {
-    Card card = popCardAt(&board->columns[fromColumnIndex],fromColumnIndex);
-    addCardEnd(&board->columns[toColumnIndex],card);
+    if (board->columns[fromColumnIndex].size > 0) {
+        Card card = popCardAt(&board->columns[fromColumnIndex], board->columns[fromColumnIndex].size-1);
+        addCardEnd(&board->columns[toColumnIndex], card);
+    }
 }
-
+void moveCardsFromColumnToColumn(Board* board, int fromColumnIndex, int fromCardIndex, int toColumnIndex) {
+    while (board->columns[fromColumnIndex].size > fromCardIndex) {
+        Card card = popCardAt(&board->columns[fromColumnIndex], fromCardIndex);
+        addCardEnd(&board->columns[toColumnIndex], card);
+    }
+}
 int getMaxRowCount(Board* board) {
     int maxRowCount = 0;
     for (int i = 0; i < 7; i++) {
@@ -132,7 +140,7 @@ int getMaxRowCount(Board* board) {
 }
 void printShowCase(Board* board) {
     printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\t\t\n");
-    printf("==========================\n");
+    printf("===================================\n");
     int maxRowCount = getMaxRowCount(board);
     for (int i = 0; i < maxRowCount; i++) {
         for (int j = 0; j < 7; j++) {
@@ -164,6 +172,11 @@ void printShowCase(Board* board) {
     //
         printf("\n");
     }
+    printf("%s%s\n", "LAST Command:",commandBuff);
+    // message
+    printf("%s\n", "MESSAGE: ");
+    // intput
+    printf("%s\n", "INPUT > ");
 
 }
 void printShowcaseF(Board* board) {
