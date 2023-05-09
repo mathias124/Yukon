@@ -6,7 +6,6 @@
 #include <string.h>
 #include "card.h"
 #include "readFile.h"
-#include "Links.h"
 #include "Prints.h"
 #include "list.h"
 #include "gameboard.h"
@@ -18,10 +17,8 @@ int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
     bool startMeny = true;
     bool GameOpen = true;
-    bool Undo = false;
     bool load = false;
     Board *playBoard;
-    char message[8];
     List *deckList = makeList();
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -100,16 +97,6 @@ int main() {
     fclose(save);
 
 
-
-
-    // making a board
-    // INITIAL VIEW
-    printf("%s\n", "LAST Command:");
-    // message
-    printf("%s\n", "MESSAGE: ");
-    // intput
-    printf("%s\n", "INPUT > ");
-
     // Read the file into the buffer
     fread(memoryBuff, sizeof(char), file_size, file);
     // Close the file
@@ -122,6 +109,16 @@ int main() {
         fgets(commandBuff, BUFSIZ, stdin);
         if (strcmp(commandBuff, "QQ\n") == 0 || strcmp(commandBuff, "qq\n") == 0) {
             GameOpen = false;
+            FILE *save;
+            save = fopen("shuffled_cards.txt", "w");
+            if (save == NULL) {
+                perror("Error could not create savefile");
+                return 1;
+            }
+            for (int i = 0; i < 52; ++i) {
+                fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
+            }
+            fclose(save);
         } else if (strcmp(commandBuff, "SR\n") == 0 || strcmp(commandBuff, "sr\n") == 0) {
             ////////// Experimental commands
 
@@ -134,28 +131,21 @@ int main() {
             playBoard = createBoard(deckList);
             makeShowCaseMode(playBoard);
             printShowCase(playBoard);
+            printf("%s%s\n", "LAST Command: ",commandBuff);
 
-            //free(board);
         } else if (strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0) {
-            //free(playBoard);
             playBoard = createBoard(deckList);
-            //test
             makePlayMode(playBoard);
             printShowCase(playBoard);
-        } else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
+            printf("%s%s\n", "LAST Command: ",commandBuff);
 
+        } else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
             printShowCase(playBoard);
-       // } else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
-         //   mode = 1;
+            printf("%s%s\n", "LAST Command: ",commandBuff);
+
         }
 
-
-            ///Redo Command
-        else if (strcmp(commandBuff, "R\n") == 0) {
-            if (Undo == true) {
-                //Needs to be undone, before redo is available.
-            }
-        }// TO:FROM command
+        // TO:FROM command
         else if (strlen(commandBuff) > 1 && strlen(commandBuff) < 7) {
             char from[3], to[3];
             sscanf(commandBuff, "%2s:%2s", from, to);
@@ -171,10 +161,13 @@ int main() {
                     moveColumnToFoundation(playBoard, fromColumnIndex, foundationIndex);
                 }
                 printShowCase(playBoard);
+                printf("%s%s\n", "LAST Command: ",commandBuff);
+                printf("%s\n", "INPUT > ");
+
 
             }
 
-                // Move from foundation to column
+            // Move from foundation to column
             else if (from[0] == 'F' && to[0] == 'C') {
                 int foundationIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
@@ -186,6 +179,8 @@ int main() {
                     moveFoundationToColumn(playBoard, foundationIndex, toColumnIndex);
                 }
                 printShowCase(playBoard);
+                printf("%s%s\n", "LAST Command: ",commandBuff);
+                printf("%s\n", "INPUT > ");
             }
                 // Move from column to column
             else if (from[0] == 'C' && to[0] == 'C') {
@@ -211,10 +206,12 @@ int main() {
                 printf("Invalid command\n");
             }
             printShowCase(playBoard);
+            printf("%s%s\n", "LAST Command: ",commandBuff);
+            printf("%s\n", "INPUT > ");
         }
 
-            //TO:CARD:FROM
-        // If command length is greater than 6, it's a 'FROM:CARD:TO' command
+    //TO:CARD:FROM
+    // If command length is greater than 6, it's a 'FROM:CARD:TO' command
     else if (strlen(commandBuff)>6){
             // Parse command into 'FROM', 'CARD', and 'TO' variables
         char from[3],card[3],to[3];
@@ -251,7 +248,9 @@ int main() {
             printf("Invalid command\n");
         }
 
-            printShowCase(playBoard);
+    printShowCase(playBoard);
+    printf("%s%s\n", "LAST Command: ",commandBuff);
+    printf("%s\n", "INPUT > ");
     }else if(getListSize(&playBoard->foundations[0])// If all cards are on the foundations, end the game
              +getListSize(&playBoard->foundations[1])
              +getListSize(&playBoard->foundations[2])

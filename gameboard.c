@@ -23,7 +23,6 @@ Board* createBoard(List* deck) {
 }
 
 void makeShowCaseMode(Board* board) {
-    // Implementation of makeShowCaseMode function
     for (int i = 0; i < 52; i++){
         addCardEnd(&board->columns[i % 7],board->deck[i]);
     }
@@ -60,23 +59,11 @@ void makePlayMode(Board* board) {
     // Deal 6 cards in second column
     for (int i = 1; i <= 6; i++) {
         addCard(&(board->columns[1]), board->deck[i]);
-       // if(i>5) {
-        // Card card = getCardAt(&(board->columns[1]), i);
-       //     Card card = getCardAt(&(board->columns[1]), 6);
-     // card.Hidden=1;
-
-      //  }
-
-
     }
 
     // Deal 7 cards in third column
     for (int i = 7; i <= 13; i++) {
         addCard(&(board->columns[2]), board->deck[i]);
-       /* if(i>11) {
-            Card card = getCardAt(&(board->columns[2]), i);
-            card.Hidden=1;
-        }*/
 
     }
 
@@ -174,48 +161,9 @@ void printShowCase(Board* board) {
     //
         printf("\n");
     }
-    printf("%s%s\n", "LAST Command:",commandBuff);
-    // message
-    printf("%s\n", "MESSAGE: ");
-    // intput
-    printf("%s\n", "INPUT > ");
-
 }
-void printShowcaseF(Board* board) {
-    printf("   C1  C2  C3  C4  C5  C6  C7   A       F\n");
-    printf("===========================================\n");
 
-    // get the maximum row count across all columns
-    int maxRowCount = getMaxRowCount(board);
-
-    // print each row
-    for (int i = 0; i < maxRowCount; i++) {
-        printf("%c  ", 'A' + i);
-
-        // print each column for the current row
-        for (int j = 0; j < 7; j++) {
-            List *column = &(board->columns[j]);
-            int columnSize = getListSize(column);
-
-            // print the card value and suit if it exists in the current column and row
-            if (columnSize > i) {
-                Card card = getCardAt(column, i);
-                printf("%c%c ", card.cardValue, card.cardSuit);
-            } else {
-                printf("   ");
-            }
-        }
-
-        // print the foundations for the current row
-        if (i == 0) {
-            printf("  [%c1] ", isListEmpty(&(board->foundations[0])) ? ' ' : 'A');
-        }else if(i == 1){
-            printf("  [%c2] ", isListEmpty(&(board->foundations[1])) ? ' ' : 'B');
-        }else if(i == 2){
-            printf("  [%c2] ", isListEmpty(&(board->foundations[1])) ? ' ' : 'B');
-        }else if(i == 3){
-            printf("  [%c3] ", isListEmpty(&(board->foundations[2])) ? ' ' : 'C');
-        }
-        printf("\n");
-    }
+void printTUI(){
+    printf("%s%s\n", "LAST Command:",commandBuff);
+    printf("%s\n", "INPUT > ");
 }

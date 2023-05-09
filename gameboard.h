@@ -23,5 +23,6 @@ void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex);
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex);
 void moveCardsFromColumnToColumn(Board* board, int fromColumnIndex, int fromCardIndex, int toColumnIndex);
 void printBoard(Board* board);
+void printTUI();
 
 #endif //UNTITLED1_GAMEBOARD_H
