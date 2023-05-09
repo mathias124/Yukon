@@ -4,23 +4,13 @@
 typedef struct Card{
     char cardSuit;
     char cardValue;
-    int trueValue;
-    int column;
     int Hidden;
-    struct Card * next;
-    struct Card * prev;
 
 }Card;
 
 typedef struct {
     Card cards[52];
 }Deck;
-// CARD DECK  FOR NOW
-
-
-//int noBlackCards = 0;
-//int noRedCards = 0;
-//int noCards=0;
 
 void shuffleCards(Card *cards, int noCards);
 

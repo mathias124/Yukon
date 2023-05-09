@@ -1,6 +1,3 @@
-//
-// Created by Felix Schmidt on 08/05/2023.
-//
 
 #include "list.h"
 
