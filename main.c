@@ -185,11 +185,11 @@ int main() {
             if (from[0] == 'C' && to[0] == 'F') {
                 int fromColumnIndex = atoi(&from[1]) - 1;
                 int foundationIndex = atoi(&to[1]) - 1;
-                List* columnList;
+                List *columnList;
                 columnList = &playBoard->columns[fromColumnIndex];
-                checkingCard = getCardAt(columnList, columnList->size-1);
+                checkingCard = getCardAt(columnList, columnList->size - 1);
                 int verifcation = moveToFoundation(checkingCard, &playBoard->foundations[foundationIndex]);
-                if(verifcation == 1){
+                if (verifcation == 1) {
                     moveColumnToFoundation(playBoard, fromColumnIndex, foundationIndex);
                 }
                 printShowCase(playBoard);
@@ -200,12 +200,12 @@ int main() {
             else if (from[0] == 'F' && to[0] == 'C') {
                 int foundationIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
-                List* foundationList;
+                List *foundationList;
                 foundationList = &playBoard->foundations[foundationIndex];
-                checkingCard = getCardAt(foundationList,0);
-                int verification = getColumnToColumnVerification(checkingCard,&playBoard->columns[toColumnIndex]);
-                if(verification == 1){
-                moveFoundationToColumn(playBoard, foundationIndex, toColumnIndex);
+                checkingCard = getCardAt(foundationList, 0);
+                int verification = getColumnToColumnVerification(checkingCard, &playBoard->columns[toColumnIndex]);
+                if (verification == 1) {
+                    moveFoundationToColumn(playBoard, foundationIndex, toColumnIndex);
                 }
                 printShowCase(playBoard);
             }
@@ -213,25 +213,27 @@ int main() {
             else if (from[0] == 'C' && to[0] == 'C') {
                 int fromColumnIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
-                List* columnList;
+                List *columnList;
                 columnList = &playBoard->columns[fromColumnIndex];
-                checkingCard = getCardAt(columnList, columnList->size-1);
+                checkingCard = getCardAt(columnList, columnList->size - 1);
                 int verification = getColumnToColumnVerification(checkingCard, &playBoard->columns[toColumnIndex]);
                 if (verification == 1) {
                     moveColumnToColumn(playBoard, fromColumnIndex, toColumnIndex);
-                } else {
-                    printf("Invalid command\n");
+                    hiddenCard = popCardAt(columnList, columnList->size - 1);
                 }
-                hiddenCard = popCardAt(&playBoard->columns[fromColumnIndex], columnList->size-1);
-                if(hiddenCard.Hidden == 1){
+                if (hiddenCard.Hidden == 1) {
                     setHidden(&hiddenCard);
-                    addCardAt(&playBoard->columns[fromColumnIndex], columnList->size,hiddenCard);
-                }else{
-                    printf("Invalid command\n");
+                    addCardAt(columnList, columnList->size, hiddenCard);
                 }
-            printShowCase(playBoard);
+
+            } else {
+                //incase of invalid comments
+                printf("Invalid command\n");
             }
-    } //TO:CARD:FROM
+            printShowCase(playBoard);
+        }
+
+            //TO:CARD:FROM
         // If command length is greater than 6, it's a 'FROM:CARD:TO' command
     else if (strlen(commandBuff)>6){
             // Parse command into 'FROM', 'CARD', and 'TO' variables
@@ -256,8 +258,8 @@ int main() {
             // If card is not hidden and move is valid, move card(s) from one column to another
             if(fromHidden == 0 && fromVerification  == 1){
                 moveCardsFromColumnToColumn(playBoard,fromColumnIndex,fromCardIndex,toColumnIndex);
+                hiddenCard = popCardAt(&playBoard->columns[fromColumnIndex], columnList->size-1);
             }
-            hiddenCard = popCardAt(&playBoard->columns[fromColumnIndex], columnList->size-1);
             if(hiddenCard.Hidden == 1){
                 setHidden(&hiddenCard);
                 addCardAt(&playBoard->columns[fromColumnIndex], columnList->size,hiddenCard);
