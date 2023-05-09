@@ -103,6 +103,19 @@ Card getCardAt(List* list, int index){
     }
     return current->card;
 }
+int getCardHiddenStatusAt(List* list, int index){
+    if(index < 0 || index > list->size) {
+        return -1;
+    }
+    Node* current = list->head;
+    for (int i = 0; i < list->size; ++i) {
+        if(index == i){
+            return current->card.Hidden;
+        }
+        current = current->next;
+    }
+    return current->card.Hidden;
+}
 Card popCardAt(List* list, int index){
     Card card = getCardAt(list, index);
     removeCardAt(list,index);

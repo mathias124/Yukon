@@ -29,5 +29,6 @@ Card popCardAt(List* list, int index);
 void print_list(List* list);
 int getListSize(List* list);
 int isListEmpty(List* list);
+int getCardHiddenStatusAt(List* list, int index);
 
 #endif //UNTITLED1_LIST_H
