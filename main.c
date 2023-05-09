@@ -10,6 +10,7 @@
 #include "Prints.h"
 #include "list.h"
 #include "gameboard.h"
+#include "moveValidation.h"
 
 void getLastCardInDeck(Card *pCard, int cards);
 
@@ -74,6 +75,7 @@ int main() {
     int noBlackCards = 0;
     int noRedCards = 0;
     int noCards = 0;
+    Card checkingCard;
 // CARD TYPES
     char tempCardSuit;
     char tempCardValue;
@@ -179,28 +181,44 @@ int main() {
             if (from[0] == 'C' && to[0] == 'F') {
                 int fromColumnIndex = atoi(&from[1]) - 1;
                 int foundationIndex = atoi(&to[1]) - 1;
-                moveColumnToFoundation(playBoard, fromColumnIndex, foundationIndex);
+                List* columnList;
+                columnList = &playBoard->columns[fromColumnIndex];
+                checkingCard = getCardAt(columnList, columnList->size-1);
+                int verifcation = moveToFoundation(checkingCard, &playBoard->foundations[foundationIndex]);
+                if(verifcation == 1){
+                    moveColumnToFoundation(playBoard, fromColumnIndex, foundationIndex);
+                }
+                printShowCase(playBoard);
             }
 
                 // Move from foundation to column
             else if (from[0] == 'F' && to[0] == 'C') {
                 int foundationIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
+                List* foundationList;
+                foundationList = &playBoard->foundations[foundationIndex];
+                checkingCard = getCardAt(foundationList,0);
+                int verification = getColumnToColumnVerification(checkingCard,&playBoard->columns[toColumnIndex]);
+                if(verification == 1){
                 moveFoundationToColumn(playBoard, foundationIndex, toColumnIndex);
+                }
+                printShowCase(playBoard);
             }
-
                 // Move from column to column
             else if (from[0] == 'C' && to[0] == 'C') {
                 int fromColumnIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
-                moveColumnToColumn(playBoard, fromColumnIndex, toColumnIndex);
+                List* columnList;
+                columnList = &playBoard->columns[fromColumnIndex];
+                checkingCard = getCardAt(columnList, columnList->size-1);
+                int verification = getColumnToColumnVerification(checkingCard, &playBoard->columns[toColumnIndex]);
+                if (verification == 1) {
+                    moveColumnToColumn(playBoard, fromColumnIndex, toColumnIndex);
+                } else {
+                    printf("Invalid command\n");
                 }
-
-                // Invalid command
-            else {
-                printf("Invalid command\n");
+            printShowCase(playBoard);
             }
-        printShowCase(playBoard);
     } //TO:CARD:FROM
     else if (strlen(commandBuff)>6){
         char from[3],card[3],to[3];
@@ -212,7 +230,8 @@ int main() {
             int fromCardIndex = getIndexOfCard(&playBoard->columns[fromColumnIndex],fromCardSuit,fromCardValue);
             int toColumnIndex = atoi(&to[1])-1;
             int fromHidden = getCardHiddenStatusAt(&playBoard->columns[fromColumnIndex],fromCardIndex);
-            if(fromHidden == 0){
+            int fromVerification = getColumnVerification(fromCardValue,fromCardSuit,&playBoard->columns[toColumnIndex]);
+            if(fromHidden == 0 && fromVerification  == 1){
                 moveCardsFromColumnToColumn(playBoard,fromColumnIndex,fromCardIndex,toColumnIndex);
             }
         } else{
