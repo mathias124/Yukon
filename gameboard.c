@@ -42,31 +42,63 @@ void makePlayMode(Board* board) {
     // Deal 6 cards in second column
     for (int i = 1; i <= 6; i++) {
         addCard(&(board->columns[1]), board->deck[i]);
+       // if(i>5) {
+        // Card card = getCardAt(&(board->columns[1]), i);
+       //     Card card = getCardAt(&(board->columns[1]), 6);
+     // card.Hidden=1;
+        board->deck[6].Hidden=1;
+      //  }
+
+
     }
 
     // Deal 7 cards in third column
     for (int i = 7; i <= 13; i++) {
         addCard(&(board->columns[2]), board->deck[i]);
+       /* if(i>11) {
+            Card card = getCardAt(&(board->columns[2]), i);
+            card.Hidden=1;
+        }*/
+        board->deck[12].Hidden=1;
+        board->deck[13].Hidden=1;
     }
 
     // Deal 8 cards in fourth column
     for (int i = 14; i <= 21; i++) {
         addCard(&(board->columns[3]), board->deck[i]);
+        board->deck[19].Hidden=1;
+        board->deck[20].Hidden=1;
+        board->deck[21].Hidden=1;
     }
 
     // Deal 9 cards in fifth column
     for (int i = 22; i <= 30; i++) {
         addCard(&(board->columns[4]), board->deck[i]);
+        board->deck[27].Hidden=1;
+        board->deck[28].Hidden=1;
+        board->deck[29].Hidden=1;
+        board->deck[30].Hidden=1;
     }
 
     // Deal 10 cards in sixth column
     for (int i = 31; i <= 40; i++) {
         addCard(&(board->columns[5]), board->deck[i]);
+        board->deck[36].Hidden=1;
+        board->deck[37].Hidden=1;
+        board->deck[38].Hidden=1;
+        board->deck[39].Hidden=1;
+        board->deck[40].Hidden=1;
     }
 
     // Deal 11 cards in seventh column
     for (int i = 41; i <= 51; i++) {
         addCard(&(board->columns[6]), board->deck[i]);
+        board->deck[46].Hidden=1;
+        board->deck[47].Hidden=1;
+        board->deck[48].Hidden=1;
+        board->deck[49].Hidden=1;
+        board->deck[50].Hidden=1;
+        board->deck[51].Hidden=1;
     }
 }
 
@@ -114,9 +146,12 @@ void printShowCase(Board* board) {
         for (int j = 0; j < 7; j++) {
             if (i < getListSize(&(board->columns[j]))) {
                 Card card = getCardAt(&(board->columns[j]), i);
+                if(card.Hidden==0)
                 printf("%c%c\t", card.cardValue, card.cardSuit);
+                else
+                    printf("[]\t");
             } else {
-                printf("[]\t");
+                printf("  \t");
             }
         }
 //

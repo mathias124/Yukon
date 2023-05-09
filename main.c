@@ -208,7 +208,9 @@ int main() {
             char fromCardSuit = card[1];
             int fromCardIndex = getIndexOfCard(&board->columns[fromColumnIndex],fromCardSuit,fromCardValue);
             int toColumnIndex = atoi(&to[1])-1;
-            moveCardsFromColumnToColumn(board,fromColumnIndex,fromCardIndex,toColumnIndex);
+            if(getCardHiddenStatusAt(&board->columns[fromColumnIndex],fromCardIndex) == 0){
+                moveCardsFromColumnToColumn(board,fromColumnIndex,fromCardIndex,toColumnIndex);
+            }
         } else{
             printf("Invalid command\n");
         }
