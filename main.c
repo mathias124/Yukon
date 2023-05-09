@@ -219,9 +219,11 @@ int main() {
                 int verification = getColumnToColumnVerification(checkingCard, &playBoard->columns[toColumnIndex]);
                 if (verification == 1) {
                     moveColumnToColumn(playBoard, fromColumnIndex, toColumnIndex);
-                    hiddenCard = popCardAt(columnList, columnList->size - 1);
+                    hiddenCard = getCardAt(columnList,columnList->size - 1);
                 }
+
                 if (hiddenCard.Hidden == 1) {
+                    hiddenCard = popCardAt(columnList, columnList->size - 1);
                     setHidden(&hiddenCard);
                     addCardAt(columnList, columnList->size, hiddenCard);
                 }
@@ -258,9 +260,10 @@ int main() {
             // If card is not hidden and move is valid, move card(s) from one column to another
             if(fromHidden == 0 && fromVerification  == 1){
                 moveCardsFromColumnToColumn(playBoard,fromColumnIndex,fromCardIndex,toColumnIndex);
-                hiddenCard = popCardAt(&playBoard->columns[fromColumnIndex], columnList->size-1);
+                hiddenCard = getCardAt(columnList,columnList->size - 1);
             }
             if(hiddenCard.Hidden == 1){
+                hiddenCard = popCardAt(&playBoard->columns[fromColumnIndex], columnList->size-1);
                 setHidden(&hiddenCard);
                 addCardAt(&playBoard->columns[fromColumnIndex], columnList->size,hiddenCard);
             }
