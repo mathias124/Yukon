@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <libc.h>
 //#include <printf.h>
 #include "gameboard.h"
 #include "list.h"
@@ -86,7 +87,7 @@ void moveFoundationToColumn(Board* board, int foundationIndex, int columnIndex) 
 }
 void moveColumnToColumn(Board* board, int fromColumnIndex, int toColumnIndex) {
     if (board->columns[fromColumnIndex].size > 0) {
-        Card card = popCardAt(&board->columns[fromColumnIndex], 0);
+        Card card = popCardAt(&board->columns[fromColumnIndex], board->columns[fromColumnIndex].size-1);
         addCardEnd(&board->columns[toColumnIndex], card);
     }
 }
@@ -108,7 +109,7 @@ int getMaxRowCount(Board* board) {
 }
 void printShowCase(Board* board) {
     printf("C1\tC2\tC3\tC4\tC5\tC6\tC7\t\t\n");
-    printf("==========================\n");
+    printf("===================================\n");
     int maxRowCount = getMaxRowCount(board);
     for (int i = 0; i < maxRowCount; i++) {
         for (int j = 0; j < 7; j++) {
