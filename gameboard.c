@@ -36,6 +36,29 @@ void makeShowCaseMode(Board* board) {
 
 
 void makePlayMode(Board* board) {
+    board->deck[6].Hidden=1;
+    board->deck[12].Hidden=1;
+    board->deck[13].Hidden=1;
+    board->deck[19].Hidden=1;
+    board->deck[20].Hidden=1;
+    board->deck[21].Hidden=1;
+    board->deck[27].Hidden=1;
+    board->deck[28].Hidden=1;
+    board->deck[29].Hidden=1;
+    board->deck[30].Hidden=1;
+    board->deck[36].Hidden=1;
+    board->deck[37].Hidden=1;
+    board->deck[38].Hidden=1;
+    board->deck[39].Hidden=1;
+    board->deck[40].Hidden=1;
+    board->deck[46].Hidden=1;
+    board->deck[47].Hidden=1;
+    board->deck[48].Hidden=1;
+    board->deck[49].Hidden=1;
+    board->deck[50].Hidden=1;
+    board->deck[51].Hidden=1;
+
+
     // Deal 1 card in first column
     addCard(&(board->columns[0]), board->deck[0]);
 
@@ -46,7 +69,7 @@ void makePlayMode(Board* board) {
         // Card card = getCardAt(&(board->columns[1]), i);
        //     Card card = getCardAt(&(board->columns[1]), 6);
      // card.Hidden=1;
-        board->deck[6].Hidden=1;
+
       //  }
 
 
@@ -59,46 +82,29 @@ void makePlayMode(Board* board) {
             Card card = getCardAt(&(board->columns[2]), i);
             card.Hidden=1;
         }*/
-        board->deck[12].Hidden=1;
-        board->deck[13].Hidden=1;
+
     }
 
     // Deal 8 cards in fourth column
     for (int i = 14; i <= 21; i++) {
         addCard(&(board->columns[3]), board->deck[i]);
-        board->deck[19].Hidden=1;
-        board->deck[20].Hidden=1;
-        board->deck[21].Hidden=1;
     }
 
     // Deal 9 cards in fifth column
     for (int i = 22; i <= 30; i++) {
         addCard(&(board->columns[4]), board->deck[i]);
-        board->deck[27].Hidden=1;
-        board->deck[28].Hidden=1;
-        board->deck[29].Hidden=1;
-        board->deck[30].Hidden=1;
+
     }
 
     // Deal 10 cards in sixth column
     for (int i = 31; i <= 40; i++) {
         addCard(&(board->columns[5]), board->deck[i]);
-        board->deck[36].Hidden=1;
-        board->deck[37].Hidden=1;
-        board->deck[38].Hidden=1;
-        board->deck[39].Hidden=1;
-        board->deck[40].Hidden=1;
+
     }
 
     // Deal 11 cards in seventh column
     for (int i = 41; i <= 51; i++) {
         addCard(&(board->columns[6]), board->deck[i]);
-        board->deck[46].Hidden=1;
-        board->deck[47].Hidden=1;
-        board->deck[48].Hidden=1;
-        board->deck[49].Hidden=1;
-        board->deck[50].Hidden=1;
-        board->deck[51].Hidden=1;
     }
 }
 
