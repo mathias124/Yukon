@@ -23,22 +23,8 @@ int main() {
     bool GameOpen = true;
     bool Undo = false;
     bool load = false;
-
     Board *playBoard;
-    LinkedLists AllList;
     char message[8];
-    AllList.list[0] = &c1;
-    AllList.list[1] = &c2;
-    AllList.list[2] = &c3;
-    AllList.list[3] = &c4;
-    AllList.list[4] = &c5;
-    AllList.list[5] = &c6;
-    AllList.list[6] = &c7;
-    AllList.list[7] = &a1;
-    AllList.list[8] = &a2;
-    AllList.list[9] = &a3;
-    AllList.list[10] = &a4;
-    int mode = 0;
     List *deckList = makeList();
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
@@ -73,10 +59,6 @@ int main() {
     }
 
     struct Card cards[52];
-    struct Card blackCards[26];
-    struct Card redCards[26];
-    int noBlackCards = 0;
-    int noRedCards = 0;
     int noCards = 0;
     Card checkingCard;
     Card hiddenCard;
@@ -124,7 +106,6 @@ int main() {
 
 
     // making a board
-
     // INITIAL VIEW
     printf("%s\n", "LAST Command:");
     // message

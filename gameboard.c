@@ -1,10 +1,5 @@
-//
-// Created by Felix Schmidt on 08/05/2023.
-//
-
 #include <stdlib.h>
 #include <stdio.h>
-//#include <printf.h>
 #include "gameboard.h"
 #include "list.h"
 
