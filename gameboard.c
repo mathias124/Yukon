@@ -137,6 +137,11 @@ void printShowCase(Board* board) {
     //
         printf("\n");
     }
+    printf("%s%s\n", "LAST Command:",commandBuff);
+    // message
+    printf("%s\n", "MESSAGE: ");
+    // intput
+    printf("%s\n", "INPUT > ");
 
 }
 void printShowcaseF(Board* board) {

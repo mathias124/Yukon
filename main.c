@@ -21,7 +21,6 @@ int main() {
     bool load=false;
     Board *board;
     Board *playBoard;
-    char commandBuff[20];
     LinkedLists AllList;
     char  message [8];
     AllList.list[0] = &c1;
