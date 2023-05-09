@@ -19,7 +19,7 @@ int main() {
     bool GameOpen = true;
     bool Undo = false;
     bool load = false;
-    Board *board;
+
     Board *playBoard;
     LinkedLists AllList;
     char message[8];
@@ -134,6 +134,7 @@ int main() {
     //This methods make the game in a while loop and makes the quit command to close game, furthermore commands.
     while (GameOpen) {
 
+
         fgets(commandBuff, BUFSIZ, stdin);
         if (strcmp(commandBuff, "QQ\n") == 0 || strcmp(commandBuff, "qq\n") == 0) {
             GameOpen = false;
@@ -146,23 +147,25 @@ int main() {
             }
             //GameOpen = false;
         } else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0) {
-            board = createBoard(deckList);
-            makeShowCaseMode(board);
-            printShowCase(board);
+            playBoard = createBoard(deckList);
+            makeShowCaseMode(playBoard);
+            printShowCase(playBoard);
 
             //free(board);
         } else if (strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0) {
-            free(playBoard);
+            //free(playBoard);
             playBoard = createBoard(deckList);
             //test
             makePlayMode(playBoard);
             printShowCase(playBoard);
         } else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
 
-            printShowCase(board);
+            printShowCase(playBoard);
        // } else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
          //   mode = 1;
         }
+
+
             ///Redo Command
         else if (strcmp(commandBuff, "R\n") == 0) {
             if (Undo == true) {
@@ -216,6 +219,11 @@ int main() {
             printf("Invalid command\n");
         }
             printShowCase(playBoard);
+    }else if(getListSize(&playBoard->foundations[0])
+             +getListSize(&playBoard->foundations[1])
+             +getListSize(&playBoard->foundations[2])
+             +getListSize(&playBoard->foundations[3]) == 52){
+            GameOpen = false;
     }
 
 
