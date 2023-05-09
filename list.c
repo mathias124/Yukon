@@ -65,6 +65,25 @@ void removeCardAt(List* list, int index){
     list->size--;
     free(toRemove);
 }
+void addCardAt(List* list, int index, Card card){
+    if(index < 0 || index > list->size){
+        return;
+    }
+    Node* toAdd = malloc(sizeof(Node));
+    toAdd->card = card;
+    if(index == 0){
+        toAdd->next = list->head;
+        list->head = toAdd;
+    }else{
+        Node* before = list->head;
+        for(int i = 1; i < index; i++){
+            before = before->next;
+        }
+        toAdd->next = before->next;
+        before->next = toAdd;
+    }
+    list->size++;
+}
 int  getIndexOf(List* list, Card card){
     Node* current = list->head;
     for (int i = 0; i < list->size; ++i) {

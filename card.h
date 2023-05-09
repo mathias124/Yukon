@@ -26,6 +26,5 @@ void shuffleCards(Card *cards, int noCards);
 
 Deck makeDeck();
 
-
 #endif
 

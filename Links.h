@@ -149,9 +149,11 @@ return 1;
 }
 
 Card * getCard(char suit, char value, LinkedLists* lists) {
+    Link* link = malloc(sizeof (Link));
     for (int i = 0; i < 7; i++) {
-        Link* link = lists->list[i];
-        Card* current = &(link->start);
+        link = lists->list[i];
+        Card* current = malloc(sizeof (Card));
+        current = &(link->start);
         while (current != NULL) {
             if (current->cardSuit == suit && current->cardValue == value) {
                 return current;
@@ -162,6 +164,7 @@ Card * getCard(char suit, char value, LinkedLists* lists) {
             current = current->next;
         }
     }
+    free(link);
     return NULL;
 }
 

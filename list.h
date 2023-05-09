@@ -22,6 +22,7 @@ void addCard(List* list,Card card);
 void addCardEnd(List* list,Card card);
 void removeCard(List* list, Card card);
 void removeCardAt(List* list, int index);
+void addCardAt(List* list, int index, Card card);
 int  getIndexOf(List* list, Card card);
 int getIndexOfCard(List* list, char cardSuit, char cardValue);
 Card getCardAt(List* list, int index);

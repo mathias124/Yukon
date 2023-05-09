@@ -13,6 +13,9 @@
 #include "moveValidation.h"
 
 void getLastCardInDeck(Card *pCard, int cards);
+void setHidden(Card* card){
+    card->Hidden = 0;
+}
 
 int main() {
     //Start Condition to keep game open for commands & gamemovement later on.
@@ -76,6 +79,7 @@ int main() {
     int noRedCards = 0;
     int noCards = 0;
     Card checkingCard;
+    Card hiddenCard;
 // CARD TYPES
     char tempCardSuit;
     char tempCardValue;
@@ -189,6 +193,7 @@ int main() {
                     moveColumnToFoundation(playBoard, fromColumnIndex, foundationIndex);
                 }
                 printShowCase(playBoard);
+
             }
 
                 // Move from foundation to column
@@ -217,6 +222,13 @@ int main() {
                 } else {
                     printf("Invalid command\n");
                 }
+                hiddenCard = popCardAt(&playBoard->columns[fromColumnIndex], columnList->size-1);
+                if(hiddenCard.Hidden == 1){
+                    setHidden(&hiddenCard);
+                    addCardAt(&playBoard->columns[fromColumnIndex], columnList->size,hiddenCard);
+                }else{
+                    printf("Invalid command\n");
+                }
             printShowCase(playBoard);
             }
     } //TO:CARD:FROM
@@ -229,14 +241,23 @@ int main() {
             char fromCardSuit = card[1];
             int fromCardIndex = getIndexOfCard(&playBoard->columns[fromColumnIndex],fromCardSuit,fromCardValue);
             int toColumnIndex = atoi(&to[1])-1;
+            List* columnList;
+            columnList = &playBoard->columns[fromColumnIndex];
             int fromHidden = getCardHiddenStatusAt(&playBoard->columns[fromColumnIndex],fromCardIndex);
             int fromVerification = getColumnVerification(fromCardValue,fromCardSuit,&playBoard->columns[toColumnIndex]);
             if(fromHidden == 0 && fromVerification  == 1){
                 moveCardsFromColumnToColumn(playBoard,fromColumnIndex,fromCardIndex,toColumnIndex);
             }
+            hiddenCard = popCardAt(&playBoard->columns[fromColumnIndex], columnList->size-1);
+            if(hiddenCard.Hidden == 1){
+                setHidden(&hiddenCard);
+                addCardAt(&playBoard->columns[fromColumnIndex], columnList->size,hiddenCard);
+            }
+
         } else{
             printf("Invalid command\n");
         }
+
             printShowCase(playBoard);
     }else if(getListSize(&playBoard->foundations[0])
              +getListSize(&playBoard->foundations[1])

@@ -152,8 +152,9 @@ void printShowCase(Board* board) {
         for (int j = 0; j < 7; j++) {
             if (i < getListSize(&(board->columns[j]))) {
                 Card card = getCardAt(&(board->columns[j]), i);
-                if(card.Hidden==0)
-                printf("%c%c\t", card.cardValue, card.cardSuit);
+                if(card.Hidden==0){
+                    printf("%c%c\t", card.cardValue, card.cardSuit);
+                }
                 else
                     printf("[]\t");
             } else {
