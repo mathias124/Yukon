@@ -232,19 +232,28 @@ int main() {
             printShowCase(playBoard);
             }
     } //TO:CARD:FROM
+        // If command length is greater than 6, it's a 'FROM:CARD:TO' command
     else if (strlen(commandBuff)>6){
+            // Parse command into 'FROM', 'CARD', and 'TO' variables
         char from[3],card[3],to[3];
         sscanf(commandBuff,"%2s:%2s:%2s",from,card,to);
+
+            // Check if 'FROM' and 'TO' are columns
         if(from[0] == 'C' && to[0] == 'C'){
+            // Get column index, card value, card suit, and card index of the card being moved
             int fromColumnIndex = atoi(&from[1])-1;
             char fromCardValue = card[0];
             char fromCardSuit = card[1];
             int fromCardIndex = getIndexOfCard(&playBoard->columns[fromColumnIndex],fromCardSuit,fromCardValue);
+
+            // Get hidden status of the card being moved and verification status of the move
             int toColumnIndex = atoi(&to[1])-1;
             List* columnList;
             columnList = &playBoard->columns[fromColumnIndex];
             int fromHidden = getCardHiddenStatusAt(&playBoard->columns[fromColumnIndex],fromCardIndex);
             int fromVerification = getColumnVerification(fromCardValue,fromCardSuit,&playBoard->columns[toColumnIndex]);
+
+            // If card is not hidden and move is valid, move card(s) from one column to another
             if(fromHidden == 0 && fromVerification  == 1){
                 moveCardsFromColumnToColumn(playBoard,fromColumnIndex,fromCardIndex,toColumnIndex);
             }
@@ -255,11 +264,12 @@ int main() {
             }
 
         } else{
+            //incase of invalid comments
             printf("Invalid command\n");
         }
 
             printShowCase(playBoard);
-    }else if(getListSize(&playBoard->foundations[0])
+    }else if(getListSize(&playBoard->foundations[0])// If all cards are on the foundations, end the game
              +getListSize(&playBoard->foundations[1])
              +getListSize(&playBoard->foundations[2])
              +getListSize(&playBoard->foundations[3]) == 52){
