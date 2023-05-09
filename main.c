@@ -13,9 +13,6 @@
 #include "moveValidation.h"
 
 void getLastCardInDeck(Card *pCard, int cards);
-void setHidden(Card* card){
-    card->Hidden = 0;
-}
 
 int main() {
     //Start Condition to keep game open for commands & gamemovement later on.

@@ -24,7 +24,7 @@ typedef struct {
 
 void shuffleCards(Card *cards, int noCards);
 
-Deck makeDeck();
+void setHidden(Card* card);
 
 #endif
 
