@@ -77,29 +77,29 @@ int moveToFoundation(Card card, List* foundation) {
         if (card.cardValue == 'A') {
             return 1;
         }
-        }  else if(card.cardValue == '3' && topCard.cardValue == '2'){
+        }  else if(card.cardValue == '3' && topCard.cardValue == '2' && card.cardSuit == topCard.cardSuit){
                 return 1;
-        } else if( card.cardValue == '4' && topCard.cardValue == '3'){
+        } else if( card.cardValue == '4' && topCard.cardValue == '3' && card.cardSuit == topCard.cardSuit){
             return 1;
-        }else if (card.cardValue == '5'  && topCard.cardValue == '4'){
+        }else if (card.cardValue == '5'  && topCard.cardValue == '4' && card.cardSuit == topCard.cardSuit){
             return 1;
-        }else if (card.cardValue == '6' && topCard.cardValue == '5'){
+        }else if (card.cardValue == '6' && topCard.cardValue == '5' && card.cardSuit == topCard.cardSuit){
             return 1;
-        }else if  (card.cardValue == '7' && topCard.cardValue == '6'){
+        }else if  (card.cardValue == '7' && topCard.cardValue == '6' && card.cardSuit == topCard.cardSuit){
             return 1;
-        }else if  (card.cardValue == '8' && topCard.cardValue == '7'){
+        }else if  (card.cardValue == '8' && topCard.cardValue == '7' && card.cardSuit == topCard.cardSuit){
             return 1;
-        }else if  (card.cardValue == '9' && topCard.cardValue == '8'){
+        }else if  (card.cardValue == '9' && topCard.cardValue == '8' && card.cardSuit == topCard.cardSuit){
             return 1;
-        }else if  (card.cardValue == 'T' && topCard.cardValue == '9') {
+        }else if  (card.cardValue == 'T' && topCard.cardValue == '9' && card.cardSuit == topCard.cardSuit) {
             return 1;
-         } else if(topCard.cardValue == 'A' && card.cardValue == '2'){
+         } else if(topCard.cardValue == 'A' && card.cardValue == '2' && card.cardSuit == topCard.cardSuit){
             return 1;
-         }else if(topCard.cardValue == 'T' && card.cardValue == 'J'){
+         }else if(topCard.cardValue == 'T' && card.cardValue == 'J' && card.cardSuit == topCard.cardSuit){
             return 1;
-        } else if(topCard.cardValue == 'J' && card.cardValue == 'Q'){
+        } else if(topCard.cardValue == 'J' && card.cardValue == 'Q' && card.cardSuit == topCard.cardSuit){
             return 1;
-        } else if(topCard.cardValue == 'Q' && card.cardValue == 'K'){
+        } else if(topCard.cardValue == 'Q' && card.cardValue == 'K' && card.cardSuit == topCard.cardSuit){
             return 1;
         }
     else if(card.cardValue == 'K'){
