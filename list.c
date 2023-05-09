@@ -76,6 +76,16 @@ int  getIndexOf(List* list, Card card){
 
     return -1;
 }
+int getIndexOfCard(List* list, char cardSuit, char cardValue){
+    Node* current = list->head;
+    for(int i = 0; i < list->size; ++i){
+        if(current->card.cardValue == cardValue && current->card.cardSuit == cardSuit) {
+            return i;
+        }
+        current = current->next;
+    }
+    return -1;
+}
 Card getCardAt(List* list, int index){
     if(index < 0 || index > list->size){
         Card* emptyCard = malloc(sizeof (Card));

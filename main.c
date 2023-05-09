@@ -161,7 +161,7 @@ int main() {
                 //Needs to be undone, before redo is available.
             }
         }// TO:FROM command
-        else if (strlen(commandBuff) > 1) {
+        else if (strlen(commandBuff) > 1 && strlen(commandBuff) < 7) {
             char from[3], to[3];
             sscanf(commandBuff, "%2s:%2s", from, to);
             // Move from column to foundation
@@ -182,20 +182,32 @@ int main() {
             else if (from[0] == 'C' && to[0] == 'C') {
                 int fromColumnIndex = atoi(&from[1]) - 1;
                 int toColumnIndex = atoi(&to[1]) - 1;
-                if (strlen(from) == 3 && from[2] != '\0' && from[2] >= '1' && from[2] <= '7') {
-                    int numCards = from[2] - '0';
-                    moveCardsFromColumnToColumn(board, fromColumnIndex, toColumnIndex, numCards);
-                } else {
-                    moveColumnToColumn(board, fromColumnIndex, toColumnIndex);
+                moveColumnToColumn(board, fromColumnIndex, toColumnIndex);
                 }
-            }
 
                 // Invalid command
             else {
                 printf("Invalid command\n");
             }
         printShowCase(board);
+    } //TO:CARD:FROM
+    else if (strlen(commandBuff)>6){
+        char from[3],card[3],to[3];
+        sscanf(commandBuff,"%2s:%2s:%2s",from,card,to);
+        if(from[0] == 'C' && to[0] == 'C'){
+            int fromColumnIndex = atoi(&from[1])-1;
+            char fromCardValue = card[0];
+            char fromCardSuit = card[1];
+            int fromCardIndex = getIndexOfCard(&board->columns[fromColumnIndex],fromCardSuit,fromCardValue);
+            int toColumnIndex = atoi(&to[1])-1;
+            moveCardsFromColumnToColumn(board,fromColumnIndex,fromCardIndex,toColumnIndex);
+        } else{
+            printf("Invalid commandss");
+        }
+            printShowCase(board);
     }
+
+
 }
 
 
