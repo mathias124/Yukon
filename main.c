@@ -202,7 +202,7 @@ int main() {
             int toColumnIndex = atoi(&to[1])-1;
             moveCardsFromColumnToColumn(board,fromColumnIndex,fromCardIndex,toColumnIndex);
         } else{
-            printf("Invalid commandss");
+            printf("Invalid command\n");
         }
             printShowCase(board);
     }

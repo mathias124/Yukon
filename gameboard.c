@@ -4,7 +4,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <libc.h>
 //#include <printf.h>
 #include "gameboard.h"
 #include "list.h"

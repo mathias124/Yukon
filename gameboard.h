@@ -11,7 +11,7 @@ typedef struct Board{
     List foundations[4];
     Card deck[52];
 }Board;
-char commandBuff[20];
+static char commandBuff[20];
 Board* createBoard(List* deck);
 void printShowCase(Board* board);
 void printShowcaseF(Board* board);
