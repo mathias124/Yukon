@@ -18,11 +18,11 @@ int main() {
     bool startMeny = true;
     bool GameOpen = true;
     bool Undo = false;
-    bool load=false;
+    bool load = false;
     Board *board;
     Board *playBoard;
     LinkedLists AllList;
-    char  message [8];
+    char message[8];
     AllList.list[0] = &c1;
     AllList.list[1] = &c2;
     AllList.list[2] = &c3;
@@ -34,8 +34,8 @@ int main() {
     AllList.list[8] = &a2;
     AllList.list[9] = &a3;
     AllList.list[10] = &a4;
-    int mode=0;
-    List* deckList = makeList();
+    int mode = 0;
+    List *deckList = makeList();
     //char *FileName = "cmake-build-debug/DATA.txt";
     // Open the file, using CWD library to get a user's directory path to make it work.
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
@@ -43,18 +43,19 @@ int main() {
         exit(EXIT_FAILURE);
     }
 //Startmenu screen(input to choose filepath and continue or not.
-    while(startMeny ==true && load==false ){
+    while (startMeny == true && load == false) {
         char userinput[50];
         printf("Enter 'Y' to conitnue with a new game  or 'LD' to load previous savefile:");
         printf("\n");
-        fgets(userinput,50,stdin);
-        if(strcmp(userinput,"Y\n") ==0) {
+        fgets(userinput, 50, stdin);
+        if (strcmp(userinput, "Y\n") == 0) {
             startMeny = false;
+            load = false;
             snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_name);
-        }else if (strcmp(userinput,"LD\n") ==0) {
+        } else if (strcmp(userinput, "LD\n") == 0) {
             //Load Save.
             printf("loading your save...\n");
-            //load = true;
+            load = true;
             startMeny = false;
             snprintf(file_path, sizeof(file_path), "%s/%s", cwd, file_save);
         } else {
@@ -67,13 +68,12 @@ int main() {
         rewind(file);
     }
 
-
     struct Card cards[52];
     struct Card blackCards[26];
     struct Card redCards[26];
     int noBlackCards = 0;
     int noRedCards = 0;
-    int noCards=0;
+    int noCards = 0;
 // CARD TYPES
     char tempCardSuit;
     char tempCardValue;
@@ -85,31 +85,38 @@ int main() {
         fclose(file);
         return 1;
     }
-  while (!feof(file) && startMeny ==false) {
+    while (!feof(file) && startMeny == false) {
         Card card;
-       int res;
-            res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
+        int res;
+        res = fscanf(file, "%c%c\n", &tempCardValue, &tempCardSuit);
         if (res == 2) {
             card = (Card) {tempCardSuit, tempCardValue};
             cards[noCards] = card; // To be deleted
-            addCard(deckList,card);
+            addCard(deckList, card);
 
         }
         noCards++;
     }
     //This method below is creating a txt file called shuffled_cards.txt and "w" writes it.
     //The next 40 lines are for creating and shuffeling cards and saving it.
-    //shuffleCards(cards, noCards);
+    if (load = false) {
+        shuffleCards(cards, noCards);
+    }
+
     FILE *save;
     save = fopen("shuffled_cards.txt", "w");
     if (save == NULL) {
         perror("Error could not create savefile");
         return 1;
     }
-    //for (int i = 0; i < 52; ++i) {
-    //        fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
-    //}
+    for (int i = 0; i < 52; ++i) {
+        fprintf(save, "%c%c\n", cards[i].cardValue, cards[i].cardSuit);
+    }
     fclose(save);
+
+
+
+
     // making a board
 
     // INITIAL VIEW
@@ -140,9 +147,10 @@ int main() {
             //GameOpen = false;
         } else if (strcmp(commandBuff, "SW\n") == 0 || strcmp(commandBuff, "sw\n") == 0) {
             board = createBoard(deckList);
-            //free(board);
             makeShowCaseMode(board);
             printShowCase(board);
+
+            //free(board);
         } else if (strcmp(commandBuff, "P\n") == 0 || strcmp(commandBuff, "p\n") == 0) {
             free(playBoard);
             playBoard = createBoard(deckList);
@@ -152,8 +160,8 @@ int main() {
         } else if (strcmp(commandBuff, "U\n") == 0 || strcmp(commandBuff, "u\n") == 0) {
 
             printShowCase(board);
-        } else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
-            mode = 1;
+       // } else if (strcmp(commandBuff, "p\n") == 0 || strcmp(commandBuff, "P\n") == 0) {
+         //   mode = 1;
         }
             ///Redo Command
         else if (strcmp(commandBuff, "R\n") == 0) {
@@ -214,7 +222,8 @@ int main() {
 }
 
 
-    return 0;}
+    return 0;
+}
     void shuffleCards(Card *cards, int noCards) {
         //Created random seed for cards, so every start is random.
         srand(time(NULL));
